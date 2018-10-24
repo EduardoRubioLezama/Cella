@@ -29,7 +29,7 @@ import javax.xml.bind.annotation.XmlTransient;
  * @author eduar
  */
 @Entity
-@Table(name = "unidadmaterial")
+@Table(name = "unidadmaterial", schema = "cella")
 @XmlRootElement
 @NamedQueries({
     @NamedQuery(name = "Unidadmaterial.findAll", query = "SELECT u FROM Unidadmaterial u")

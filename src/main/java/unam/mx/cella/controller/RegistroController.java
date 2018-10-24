@@ -103,7 +103,7 @@ public class RegistroController {
             alum.setCorreo(alumno.getCorreo());
             alum.setNombreusuario(alumno.getNombreusuario());
             alum.setContrasena(alumno.getContrasena());
-
+            alum.setEdocuenta(true);
 
             ajpa.create(alum);
 

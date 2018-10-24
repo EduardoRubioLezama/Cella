@@ -24,7 +24,7 @@ import javax.xml.bind.annotation.XmlRootElement;
  * @author eduar
  */
 @Entity
-@Table(name = "subcategorias")
+@Table(name = "subcategorias", schema = "cella")
 @XmlRootElement
 @NamedQueries({
     @NamedQuery(name = "Subcategorias.findAll", query = "SELECT s FROM Subcategorias s")
