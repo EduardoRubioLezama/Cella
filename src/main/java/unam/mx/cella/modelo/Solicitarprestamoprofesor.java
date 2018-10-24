@@ -9,12 +9,14 @@ import java.io.Serializable;
 import java.util.Date;
 import javax.persistence.Basic;
 import javax.persistence.Column;
+import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
-import javax.persistence.MappedSuperclass;
+import javax.persistence.NamedQueries;
+import javax.persistence.NamedQuery;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
@@ -24,19 +26,23 @@ import javax.xml.bind.annotation.XmlRootElement;
  *
  * @author eduar
  */
-@MappedSuperclass
-@Table(catalog = "cella", schema = "cella")
+@Entity
+@Table(name = "solicitarprestamoprofesor")
 @XmlRootElement
+@NamedQueries({
+    @NamedQuery(name = "Solicitarprestamoprofesor.findAll", query = "SELECT s FROM Solicitarprestamoprofesor s")
+    , @NamedQuery(name = "Solicitarprestamoprofesor.findById", query = "SELECT s FROM Solicitarprestamoprofesor s WHERE s.id = :id")
+    , @NamedQuery(name = "Solicitarprestamoprofesor.findByFechainicio", query = "SELECT s FROM Solicitarprestamoprofesor s WHERE s.fechainicio = :fechainicio")})
 public class Solicitarprestamoprofesor implements Serializable {
 
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Basic(optional = false)
-    @Column(nullable = false)
+    @Column(name = "id")
     private Integer id;
     @Basic(optional = false)
-    @Column(nullable = false)
+    @Column(name = "fechainicio")
     @Temporal(TemporalType.DATE)
     private Date fechainicio;
     @JoinColumn(name = "id_unidad_material", referencedColumnName = "id")

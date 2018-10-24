@@ -8,12 +8,14 @@ package unam.mx.cella.modelo;
 import java.io.Serializable;
 import javax.persistence.Basic;
 import javax.persistence.Column;
+import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
-import javax.persistence.MappedSuperclass;
+import javax.persistence.NamedQueries;
+import javax.persistence.NamedQuery;
 import javax.persistence.Table;
 import javax.xml.bind.annotation.XmlRootElement;
 
@@ -21,25 +23,31 @@ import javax.xml.bind.annotation.XmlRootElement;
  *
  * @author eduar
  */
-@MappedSuperclass
-@Table(name = "contener_kit_material", catalog = "cella", schema = "cella")
+@Entity
+@Table(name = "contener_kit_material")
 @XmlRootElement
+@NamedQueries({
+    @NamedQuery(name = "ContenerKitMaterial.findAll", query = "SELECT c FROM ContenerKitMaterial c")
+    , @NamedQuery(name = "ContenerKitMaterial.findById", query = "SELECT c FROM ContenerKitMaterial c WHERE c.id = :id")
+    , @NamedQuery(name = "ContenerKitMaterial.findByNombrematerial", query = "SELECT c FROM ContenerKitMaterial c WHERE c.nombrematerial = :nombrematerial")
+    , @NamedQuery(name = "ContenerKitMaterial.findByNombrekit", query = "SELECT c FROM ContenerKitMaterial c WHERE c.nombrekit = :nombrekit")
+    , @NamedQuery(name = "ContenerKitMaterial.findByNounidades", query = "SELECT c FROM ContenerKitMaterial c WHERE c.nounidades = :nounidades")})
 public class ContenerKitMaterial implements Serializable {
 
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Basic(optional = false)
-    @Column(nullable = false)
+    @Column(name = "id")
     private Integer id;
-    @Column(length = 2147483647)
+    @Column(name = "nombrematerial")
     private String nombrematerial;
-    @Column(length = 2147483647)
+    @Column(name = "nombrekit")
     private String nombrekit;
     @Basic(optional = false)
-    @Column(nullable = false)
+    @Column(name = "nounidades")
     private int nounidades;
-    @JoinColumn(name = "id_material", referencedColumnName = "id", nullable = false)
+    @JoinColumn(name = "id_material", referencedColumnName = "id")
     @ManyToOne(optional = false)
     private Material idMaterial;
 

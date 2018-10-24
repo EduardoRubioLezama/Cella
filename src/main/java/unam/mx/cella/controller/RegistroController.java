@@ -14,7 +14,7 @@ import javax.faces.application.FacesMessage;
 import javax.persistence.EntityManagerFactory;
 import unam.mx.cella.modelo.Alumno;
 import unam.mx.cella.modelo.EntityProvider;
-import unam.mx.cella.modelo.controller.AlumnoJpaController;
+import unam.mx.cella.modelo.AlumnoJpaController;
 
 
 
@@ -53,6 +53,7 @@ public class RegistroController {
      */
     public RegistroController() {
         emf = EntityProvider.provider();
+        System.out.println("creado");
         FacesContext.getCurrentInstance().getViewRoot().setLocale(
                 new Locale("es-Mx"));
         this.alumno = new Alumno();

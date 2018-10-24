@@ -8,12 +8,14 @@ package unam.mx.cella.modelo;
 import java.io.Serializable;
 import javax.persistence.Basic;
 import javax.persistence.Column;
+import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
-import javax.persistence.MappedSuperclass;
+import javax.persistence.NamedQueries;
+import javax.persistence.NamedQuery;
 import javax.persistence.Table;
 import javax.xml.bind.annotation.XmlRootElement;
 
@@ -21,22 +23,27 @@ import javax.xml.bind.annotation.XmlRootElement;
  *
  * @author eduar
  */
-@MappedSuperclass
-@Table(catalog = "cella", schema = "cella")
+@Entity
+@Table(name = "subcategorias")
 @XmlRootElement
+@NamedQueries({
+    @NamedQuery(name = "Subcategorias.findAll", query = "SELECT s FROM Subcategorias s")
+    , @NamedQuery(name = "Subcategorias.findById", query = "SELECT s FROM Subcategorias s WHERE s.id = :id")
+    , @NamedQuery(name = "Subcategorias.findByNombrecategoria", query = "SELECT s FROM Subcategorias s WHERE s.nombrecategoria = :nombrecategoria")
+    , @NamedQuery(name = "Subcategorias.findByNombresubcategoria", query = "SELECT s FROM Subcategorias s WHERE s.nombresubcategoria = :nombresubcategoria")})
 public class Subcategorias implements Serializable {
 
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Basic(optional = false)
-    @Column(nullable = false)
+    @Column(name = "id")
     private Integer id;
-    @Column(length = 2147483647)
+    @Column(name = "nombrecategoria")
     private String nombrecategoria;
-    @Column(length = 2147483647)
+    @Column(name = "nombresubcategoria")
     private String nombresubcategoria;
-    @JoinColumn(name = "id_categoria", referencedColumnName = "id", nullable = false)
+    @JoinColumn(name = "id_categoria", referencedColumnName = "id")
     @ManyToOne(optional = false)
     private Categoria idCategoria;
 

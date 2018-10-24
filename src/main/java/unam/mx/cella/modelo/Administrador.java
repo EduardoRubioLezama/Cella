@@ -8,53 +8,64 @@ package unam.mx.cella.modelo;
 import java.io.Serializable;
 import javax.persistence.Basic;
 import javax.persistence.Column;
+import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Lob;
-import javax.persistence.MappedSuperclass;
+import javax.persistence.NamedQueries;
+import javax.persistence.NamedQuery;
 import javax.persistence.Table;
-import javax.persistence.UniqueConstraint;
 import javax.xml.bind.annotation.XmlRootElement;
 
 /**
  *
  * @author eduar
  */
-@MappedSuperclass
-@Table(catalog = "cella", schema = "cella", uniqueConstraints = {
-    @UniqueConstraint(columnNames = {"correo"})})
+@Entity
+@Table(name = "administrador")
 @XmlRootElement
+@NamedQueries({
+    @NamedQuery(name = "Administrador.findAll", query = "SELECT a FROM Administrador a")
+    , @NamedQuery(name = "Administrador.findById", query = "SELECT a FROM Administrador a WHERE a.id = :id")
+    , @NamedQuery(name = "Administrador.findByNombreusuario", query = "SELECT a FROM Administrador a WHERE a.nombreusuario = :nombreusuario")
+    , @NamedQuery(name = "Administrador.findByCorreo", query = "SELECT a FROM Administrador a WHERE a.correo = :correo")
+    , @NamedQuery(name = "Administrador.findByContrasena", query = "SELECT a FROM Administrador a WHERE a.contrasena = :contrasena")
+    , @NamedQuery(name = "Administrador.findByNombre", query = "SELECT a FROM Administrador a WHERE a.nombre = :nombre")
+    , @NamedQuery(name = "Administrador.findByApellidop", query = "SELECT a FROM Administrador a WHERE a.apellidop = :apellidop")
+    , @NamedQuery(name = "Administrador.findByApellidom", query = "SELECT a FROM Administrador a WHERE a.apellidom = :apellidom")
+    , @NamedQuery(name = "Administrador.findByRfc", query = "SELECT a FROM Administrador a WHERE a.rfc = :rfc")})
 public class Administrador implements Serializable {
 
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Basic(optional = false)
-    @Column(nullable = false)
+    @Column(name = "id")
     private Integer id;
     @Basic(optional = false)
-    @Column(nullable = false, length = 2147483647)
+    @Column(name = "nombreusuario")
     private String nombreusuario;
     @Basic(optional = false)
-    @Column(nullable = false, length = 2147483647)
+    @Column(name = "correo")
     private String correo;
     @Basic(optional = false)
-    @Column(nullable = false, length = 2147483647)
+    @Column(name = "contrasena")
     private String contrasena;
     @Basic(optional = false)
-    @Column(nullable = false, length = 2147483647)
+    @Column(name = "nombre")
     private String nombre;
     @Basic(optional = false)
-    @Column(nullable = false, length = 2147483647)
+    @Column(name = "apellidop")
     private String apellidop;
     @Basic(optional = false)
-    @Column(nullable = false, length = 2147483647)
+    @Column(name = "apellidom")
     private String apellidom;
     @Lob
+    @Column(name = "foto")
     private byte[] foto;
     @Basic(optional = false)
-    @Column(nullable = false, length = 13)
+    @Column(name = "rfc")
     private String rfc;
 
     public Administrador() {

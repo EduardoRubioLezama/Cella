@@ -6,18 +6,19 @@
 package unam.mx.cella.modelo;
 
 import java.io.Serializable;
-import java.util.List;
+import java.util.Collection;
 import javax.persistence.Basic;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
+import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Lob;
-import javax.persistence.MappedSuperclass;
+import javax.persistence.NamedQueries;
+import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
-import javax.persistence.UniqueConstraint;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlTransient;
 
@@ -25,32 +26,37 @@ import javax.xml.bind.annotation.XmlTransient;
  *
  * @author eduar
  */
-@MappedSuperclass
-@Table(catalog = "cella", schema = "cella", uniqueConstraints = {
-    @UniqueConstraint(columnNames = {"nombrematerial"})})
+@Entity
+@Table(name = "material")
 @XmlRootElement
+@NamedQueries({
+    @NamedQuery(name = "Material.findAll", query = "SELECT m FROM Material m")
+    , @NamedQuery(name = "Material.findById", query = "SELECT m FROM Material m WHERE m.id = :id")
+    , @NamedQuery(name = "Material.findByNombrematerial", query = "SELECT m FROM Material m WHERE m.nombrematerial = :nombrematerial")
+    , @NamedQuery(name = "Material.findByDescripcion", query = "SELECT m FROM Material m WHERE m.descripcion = :descripcion")})
 public class Material implements Serializable {
 
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Basic(optional = false)
-    @Column(nullable = false)
+    @Column(name = "id")
     private Integer id;
     @Basic(optional = false)
-    @Column(nullable = false, length = 2147483647)
+    @Column(name = "nombrematerial")
     private String nombrematerial;
     @Basic(optional = false)
-    @Column(nullable = false, length = 2147483647)
+    @Column(name = "descripcion")
     private String descripcion;
     @Lob
+    @Column(name = "foto")
     private byte[] foto;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "idMaterial")
-    private List<ContenerKitMaterial> contenerKitMaterialList;
+    private Collection<ContenerKitMaterial> contenerKitMaterialCollection;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "idMaterial")
-    private List<Unidadmaterial> unidadmaterialList;
+    private Collection<Unidadmaterial> unidadmaterialCollection;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "idMaterial")
-    private List<PertenecerMaterialCategoria> pertenecerMaterialCategoriaList;
+    private Collection<PertenecerMaterialCategoria> pertenecerMaterialCategoriaCollection;
 
     public Material() {
     }
@@ -98,30 +104,30 @@ public class Material implements Serializable {
     }
 
     @XmlTransient
-    public List<ContenerKitMaterial> getContenerKitMaterialList() {
-        return contenerKitMaterialList;
+    public Collection<ContenerKitMaterial> getContenerKitMaterialCollection() {
+        return contenerKitMaterialCollection;
     }
 
-    public void setContenerKitMaterialList(List<ContenerKitMaterial> contenerKitMaterialList) {
-        this.contenerKitMaterialList = contenerKitMaterialList;
-    }
-
-    @XmlTransient
-    public List<Unidadmaterial> getUnidadmaterialList() {
-        return unidadmaterialList;
-    }
-
-    public void setUnidadmaterialList(List<Unidadmaterial> unidadmaterialList) {
-        this.unidadmaterialList = unidadmaterialList;
+    public void setContenerKitMaterialCollection(Collection<ContenerKitMaterial> contenerKitMaterialCollection) {
+        this.contenerKitMaterialCollection = contenerKitMaterialCollection;
     }
 
     @XmlTransient
-    public List<PertenecerMaterialCategoria> getPertenecerMaterialCategoriaList() {
-        return pertenecerMaterialCategoriaList;
+    public Collection<Unidadmaterial> getUnidadmaterialCollection() {
+        return unidadmaterialCollection;
     }
 
-    public void setPertenecerMaterialCategoriaList(List<PertenecerMaterialCategoria> pertenecerMaterialCategoriaList) {
-        this.pertenecerMaterialCategoriaList = pertenecerMaterialCategoriaList;
+    public void setUnidadmaterialCollection(Collection<Unidadmaterial> unidadmaterialCollection) {
+        this.unidadmaterialCollection = unidadmaterialCollection;
+    }
+
+    @XmlTransient
+    public Collection<PertenecerMaterialCategoria> getPertenecerMaterialCategoriaCollection() {
+        return pertenecerMaterialCategoriaCollection;
+    }
+
+    public void setPertenecerMaterialCategoriaCollection(Collection<PertenecerMaterialCategoria> pertenecerMaterialCategoriaCollection) {
+        this.pertenecerMaterialCategoriaCollection = pertenecerMaterialCategoriaCollection;
     }
 
     @Override

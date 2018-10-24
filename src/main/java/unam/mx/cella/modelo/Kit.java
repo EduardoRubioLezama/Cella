@@ -8,12 +8,14 @@ package unam.mx.cella.modelo;
 import java.io.Serializable;
 import javax.persistence.Basic;
 import javax.persistence.Column;
+import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
-import javax.persistence.MappedSuperclass;
+import javax.persistence.NamedQueries;
+import javax.persistence.NamedQuery;
 import javax.persistence.Table;
 import javax.xml.bind.annotation.XmlRootElement;
 
@@ -21,22 +23,27 @@ import javax.xml.bind.annotation.XmlRootElement;
  *
  * @author eduar
  */
-@MappedSuperclass
-@Table(catalog = "cella", schema = "cella")
+@Entity
+@Table(name = "kit")
 @XmlRootElement
+@NamedQueries({
+    @NamedQuery(name = "Kit.findAll", query = "SELECT k FROM Kit k")
+    , @NamedQuery(name = "Kit.findById", query = "SELECT k FROM Kit k WHERE k.id = :id")
+    , @NamedQuery(name = "Kit.findByNombrekit", query = "SELECT k FROM Kit k WHERE k.nombrekit = :nombrekit")
+    , @NamedQuery(name = "Kit.findByMateria", query = "SELECT k FROM Kit k WHERE k.materia = :materia")})
 public class Kit implements Serializable {
 
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Basic(optional = false)
-    @Column(nullable = false)
+    @Column(name = "id")
     private Integer id;
     @Basic(optional = false)
-    @Column(nullable = false, length = 2147483647)
+    @Column(name = "nombrekit")
     private String nombrekit;
     @Basic(optional = false)
-    @Column(nullable = false, length = 2147483647)
+    @Column(name = "materia")
     private String materia;
     @JoinColumn(name = "id_profesor", referencedColumnName = "id")
     @ManyToOne

@@ -6,46 +6,43 @@
 package unam.mx.cella.modelo;
 
 import java.io.Serializable;
-import java.util.List;
 import javax.persistence.Basic;
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
+import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.MappedSuperclass;
-import javax.persistence.OneToMany;
+import javax.persistence.NamedQueries;
+import javax.persistence.NamedQuery;
 import javax.persistence.Table;
-import javax.persistence.UniqueConstraint;
 import javax.xml.bind.annotation.XmlRootElement;
-import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
  * @author eduar
  */
-@MappedSuperclass
-@Table(catalog = "cella", schema = "cella", uniqueConstraints = {
-    @UniqueConstraint(columnNames = {"nombrecategoria"})})
+@Entity
+@Table(name = "categoria")
 @XmlRootElement
+@NamedQueries({
+    @NamedQuery(name = "Categoria.findAll", query = "SELECT c FROM Categoria c")
+    , @NamedQuery(name = "Categoria.findById", query = "SELECT c FROM Categoria c WHERE c.id = :id")
+    , @NamedQuery(name = "Categoria.findByNombrecategoria", query = "SELECT c FROM Categoria c WHERE c.nombrecategoria = :nombrecategoria")
+    , @NamedQuery(name = "Categoria.findByDescripcion", query = "SELECT c FROM Categoria c WHERE c.descripcion = :descripcion")})
 public class Categoria implements Serializable {
 
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Basic(optional = false)
-    @Column(nullable = false)
+    @Column(name = "id")
     private Integer id;
     @Basic(optional = false)
-    @Column(nullable = false, length = 2147483647)
+    @Column(name = "nombrecategoria")
     private String nombrecategoria;
     @Basic(optional = false)
-    @Column(nullable = false, length = 2147483647)
+    @Column(name = "descripcion")
     private String descripcion;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "idCategoria")
-    private List<Subcategorias> subcategoriasList;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "idCategoria")
-    private List<PertenecerMaterialCategoria> pertenecerMaterialCategoriaList;
 
     public Categoria() {
     }
@@ -82,24 +79,6 @@ public class Categoria implements Serializable {
 
     public void setDescripcion(String descripcion) {
         this.descripcion = descripcion;
-    }
-
-    @XmlTransient
-    public List<Subcategorias> getSubcategoriasList() {
-        return subcategoriasList;
-    }
-
-    public void setSubcategoriasList(List<Subcategorias> subcategoriasList) {
-        this.subcategoriasList = subcategoriasList;
-    }
-
-    @XmlTransient
-    public List<PertenecerMaterialCategoria> getPertenecerMaterialCategoriaList() {
-        return pertenecerMaterialCategoriaList;
-    }
-
-    public void setPertenecerMaterialCategoriaList(List<PertenecerMaterialCategoria> pertenecerMaterialCategoriaList) {
-        this.pertenecerMaterialCategoriaList = pertenecerMaterialCategoriaList;
     }
 
     @Override

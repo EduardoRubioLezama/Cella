@@ -14,7 +14,7 @@ import javax.persistence.EntityNotFoundException;
 import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Root;
 import unam.mx.cella.modelo.Alumno;
-import unam.mx.cella.modelo.controller.exceptions.NonexistentEntityException;
+import unam.mx.cella.modelo.exceptions.NonexistentEntityException;
 
 /**
  *

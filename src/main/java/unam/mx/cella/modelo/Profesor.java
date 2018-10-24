@@ -6,17 +6,18 @@
 package unam.mx.cella.modelo;
 
 import java.io.Serializable;
-import java.util.List;
+import java.util.Collection;
 import javax.persistence.Basic;
 import javax.persistence.Column;
+import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Lob;
-import javax.persistence.MappedSuperclass;
+import javax.persistence.NamedQueries;
+import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
-import javax.persistence.UniqueConstraint;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlTransient;
 
@@ -24,49 +25,61 @@ import javax.xml.bind.annotation.XmlTransient;
  *
  * @author eduar
  */
-@MappedSuperclass
-@Table(catalog = "cella", schema = "cella", uniqueConstraints = {
-    @UniqueConstraint(columnNames = {"correo"})})
+@Entity
+@Table(name = "profesor")
 @XmlRootElement
+@NamedQueries({
+    @NamedQuery(name = "Profesor.findAll", query = "SELECT p FROM Profesor p")
+    , @NamedQuery(name = "Profesor.findById", query = "SELECT p FROM Profesor p WHERE p.id = :id")
+    , @NamedQuery(name = "Profesor.findByNombreusuario", query = "SELECT p FROM Profesor p WHERE p.nombreusuario = :nombreusuario")
+    , @NamedQuery(name = "Profesor.findByCorreo", query = "SELECT p FROM Profesor p WHERE p.correo = :correo")
+    , @NamedQuery(name = "Profesor.findByContrasena", query = "SELECT p FROM Profesor p WHERE p.contrasena = :contrasena")
+    , @NamedQuery(name = "Profesor.findByNombre", query = "SELECT p FROM Profesor p WHERE p.nombre = :nombre")
+    , @NamedQuery(name = "Profesor.findByApellidop", query = "SELECT p FROM Profesor p WHERE p.apellidop = :apellidop")
+    , @NamedQuery(name = "Profesor.findByApellidom", query = "SELECT p FROM Profesor p WHERE p.apellidom = :apellidom")
+    , @NamedQuery(name = "Profesor.findByEdocuenta", query = "SELECT p FROM Profesor p WHERE p.edocuenta = :edocuenta")
+    , @NamedQuery(name = "Profesor.findByRfc", query = "SELECT p FROM Profesor p WHERE p.rfc = :rfc")
+    , @NamedQuery(name = "Profesor.findByNotrabajador", query = "SELECT p FROM Profesor p WHERE p.notrabajador = :notrabajador")})
 public class Profesor implements Serializable {
 
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Basic(optional = false)
-    @Column(nullable = false)
+    @Column(name = "id")
     private Integer id;
     @Basic(optional = false)
-    @Column(nullable = false, length = 2147483647)
+    @Column(name = "nombreusuario")
     private String nombreusuario;
     @Basic(optional = false)
-    @Column(nullable = false, length = 2147483647)
+    @Column(name = "correo")
     private String correo;
     @Basic(optional = false)
-    @Column(nullable = false, length = 2147483647)
+    @Column(name = "contrasena")
     private String contrasena;
     @Basic(optional = false)
-    @Column(nullable = false, length = 2147483647)
+    @Column(name = "nombre")
     private String nombre;
     @Basic(optional = false)
-    @Column(nullable = false, length = 2147483647)
+    @Column(name = "apellidop")
     private String apellidop;
     @Basic(optional = false)
-    @Column(nullable = false, length = 2147483647)
+    @Column(name = "apellidom")
     private String apellidom;
     @Lob
+    @Column(name = "foto")
     private byte[] foto;
     @Basic(optional = false)
-    @Column(nullable = false)
+    @Column(name = "edocuenta")
     private boolean edocuenta;
     @Basic(optional = false)
-    @Column(nullable = false, length = 13)
+    @Column(name = "rfc")
     private String rfc;
     @Basic(optional = false)
-    @Column(nullable = false, length = 2147483647)
+    @Column(name = "notrabajador")
     private String notrabajador;
     @OneToMany(mappedBy = "idProfesor")
-    private List<Kit> kitList;
+    private Collection<Kit> kitCollection;
 
     public Profesor() {
     }
@@ -177,12 +190,12 @@ public class Profesor implements Serializable {
     }
 
     @XmlTransient
-    public List<Kit> getKitList() {
-        return kitList;
+    public Collection<Kit> getKitCollection() {
+        return kitCollection;
     }
 
-    public void setKitList(List<Kit> kitList) {
-        this.kitList = kitList;
+    public void setKitCollection(Collection<Kit> kitCollection) {
+        this.kitCollection = kitCollection;
     }
 
     @Override
