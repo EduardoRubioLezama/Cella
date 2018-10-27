@@ -86,7 +86,7 @@ public class RegistroController {
                     "Fallo de registro: Las contraseñas deben coincidir", ""));
         } else {
            // LoginJpaController ljpa = new LoginJpaController(emf);
-            AlumnoJpaController ajpa = new AlumnoJpaController(emf);
+            AlumnoJpaController pjpa = new AlumnoJpaController(emf);
 
            // Login login = new Login();
             //login.setUsuario(usuario);
@@ -105,7 +105,7 @@ public class RegistroController {
             alum.setContrasena(alumno.getContrasena());
             alum.setEdocuenta(true);
 
-            ajpa.create(alum);
+            pjpa.create(alum);
 
             FacesContext.getCurrentInstance().addMessage(null,
                                                          new FacesMessage(FacesMessage.SEVERITY_INFO,

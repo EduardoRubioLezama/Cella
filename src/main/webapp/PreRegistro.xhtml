@@ -24,17 +24,17 @@
                     <div class="form-group row">
                         <label for="inputName3" class="col-sm-2 col-form-label" ></label>
                         <div class="col-sm-2">
-                            <p:inputText type="text" class="form-control" id="inputName3" placeholder="Nombre(s)" required="true" requiredMessage="Nombre:Campo Obligatorio" value="#{registroController.alumno.nombre}"/>
+                            <p:inputText type="text" class="form-control" id="inputName3" placeholder="Nombre(s)" required="true" requiredMessage="Nombre:Campo Obligatorio" value="#{preRegistroController.profesor.nombre}"/>
                         </div>
                         
                         <label for="inputApellidoP3" class="col-sm-1 col-form-label"></label>
                         <div class="col-sm-2">
-                            <p:inputText type="text" class="form-control" id="inputApellidoP3" placeholder="Apellido Paterno" required="true" requiredMessage="ApellidoPaterno:Campo Obligatorio" value="#{registroController.alumno.apellidop}"/>
+                            <p:inputText type="text" class="form-control" id="inputApellidoP3" placeholder="Apellido Paterno" required="true" requiredMessage="ApellidoPaterno:Campo Obligatorio" value="#{preRegistroController.profesor.apellidop}"/>
                         </div>
                         
                         <label for="inputApellidoM3" class="col-sm-1 col-form-label"></label>
                         <div class="col-sm-2">
-                            <p:inputText type="text" class="form-control" id="inputApellidoM3" placeholder= "Apellido Materno" required="true" requiredMessage="ApellidoMaterno:Campo Obligatorio" value="#{registroController.alumno.apellidom}"/>
+                            <p:inputText type="text" class="form-control" id="inputApellidoM3" placeholder= "Apellido Materno" required="true" requiredMessage="ApellidoMaterno:Campo Obligatorio" value="#{preRegistroController.profesor.apellidom}"/>
                         </div>
                         
                     </div>
@@ -42,7 +42,7 @@
                     <div class="form-group row ">
                         <label for="inputUsuario3" class="col-sm-2 col-form-label"></label>
                         <div class="col-sm-2">
-                            <p:inputText type="text" class="form-control" id="inputUsuario3" placeholder=" Nombre usario(unico) " required="true" requiredMessage="NombreUsuario:Campo Obligatorio" value="#{registroController.alumno.nombreusuario}"/>
+                            <p:inputText type="text" class="form-control" id="inputUsuario3" placeholder=" Nombre usario(unico) " required="true" requiredMessage="NombreUsuario:Campo Obligatorio" value="#{preRegistroController.profesor.nombreusuario}"/>
                         </div>
 
                     </div>
@@ -50,12 +50,12 @@
                     <div class="form-group row ">
                         <label for="rfc3" class="col-sm-2 col-form-label"></label>
                         <div class="col-sm-2">
-                            <p:inputText type="text" class="form-control" id="rfc3" placeholder="rfc" required="true" requiredMessage="rfc:Campo Obligatorio" value=""/>
+                            <p:inputText type="text" class="form-control" id="rfc3" placeholder="rfc" required="true" requiredMessage="rfc:Campo Obligatorio" value="#{preRegistroController.profesor.rfc}"/>
                         </div>
                         
                         <label for="noTrabajador" class="col-sm-1 col-form-label"></label>
                         <div class="col-sm-2">
-                            <p:inputText type="text" class="form-control" id="noTrabajador" placeholder="noTrabajador" required="true" requiredMessage="noTrabjador:Campo Obligatorio" value=""/>
+                            <p:inputText type="text" class="form-control" id="noTrabajador" placeholder="noTrabajador" required="true" requiredMessage="noTrabjador:Campo Obligatorio" value="#{preRegistroController.profesor.notrabajador}"/>
                         </div>
 
                     </div>
@@ -63,7 +63,7 @@
                     <div class="form-group row ">
                         <label for="inputEmail3" class="col-sm-2 col-form-label"></label>
                         <div class="col-sm-3">
-                            <p:inputText value="#{registroController.alumno.correo}" required="true" id="email" size="20" placeholder="@ciencias.unam.mx" validatorMessage="El correo no es valido">
+                            <p:inputText value="#{preRegistroController.profesor.correo}" required="true" id="email" size="20" placeholder="@ciencias.unam.mx" validatorMessage="El correo no es valido">
                                 <f:validateRegex pattern="[\w\.-_]*[a-zA-Z0-9_]@ciencias\.unam\.mx" />
                             </p:inputText>
                             <p:message for="email" id="emailMsg"/> 
@@ -74,21 +74,21 @@
                     <div class="form-group row">
                         <label for="inputPassword3" class="col-sm-2 col-form-label"></label>
                         <div class="col-sm-2">
-                            <p:password class="form-control" id="inputPassword3" placeholder="contraseÃ±a" required="true" requiredMessage="contraseÃ±a: campo obligatorio" feedback="true" value="#{registroController.alumno.contrasena}"/>
+                            <p:password class="form-control" id="inputPassword3" placeholder="contraseÃ±a" required="true" requiredMessage="contraseÃ±a: campo obligatorio" feedback="true" value="#{preRegistroController.profesor.contrasena}"/>
                         </div>
                     </div>
                     
                     <div class="form-group row">
                         <label for="inputPasswordConfirm3" class="col-sm-2 col-form-label"></label>
                         <div class="col-sm-2">
-                            <p:password class="form-control" id="inputPasswordConfirm3" placeholder="confirma contraseÃ±a" required="true" requiredMessage="confirmaContraseÃ±a:Campo Obligatorio" feedback="true" value="#{registroController.confirmacion}"/>
+                            <p:password class="form-control" id="inputPasswordConfirm3" placeholder="confirma contraseÃ±a" required="true" requiredMessage="confirmaContraseÃ±a:Campo Obligatorio" feedback="true" value="#{preRegistroController.confirmacion}"/>
                         </div>
                     </div>
                     
                     <div class="form-group row">
                         <div class="col-sm-3" align="right">
                             
-                            <button type="submit" class="btn btn-primary btn-lg" jsf:action="#{registroController.addUser}">Registrar</button>
+                            <button type="submit" class="btn btn-primary btn-lg" jsf:action="#{preRegistroController.addUser}">Registrar</button>
                         </div>
                     </div>
                     
