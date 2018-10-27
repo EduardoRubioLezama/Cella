@@ -79,16 +79,43 @@ public class RegistroController {
         return null; 
     }
     
+    public boolean verificaUsuario(String userName){
+        
+        AlumnoJpaController ajpa = new AlumnoJpaController(emf);
+        return ajpa.findAlumno(userName) == null;
+    }
+    
+     public boolean verificaCorreo(String correo){
+        
+        AlumnoJpaController ajpa = new AlumnoJpaController(emf);
+        return ajpa.findCorreo(correo) == null;
+    }
+
+    
+    
     public String addUser() {
         if (!alumno.getContrasena().equals(confirmacion)) {
             FacesContext.getCurrentInstance().addMessage(null
             , new FacesMessage(FacesMessage.SEVERITY_ERROR, 
                     "Fallo de registro: Las contraseñas deben coincidir", ""));
-        } else {
-           // LoginJpaController ljpa = new LoginJpaController(emf);
+        } 
+        if(!(verificaUsuario(alumno.getNombreusuario()))){
+            FacesContext.getCurrentInstance().addMessage(null
+            , new FacesMessage(FacesMessage.SEVERITY_ERROR, 
+                    "Fallo de registro: Nombre de usuario existente, elige otro", ""));
+        } 
+        
+        if(!(verificaCorreo(alumno.getCorreo()))){
+            FacesContext.getCurrentInstance().addMessage(null
+            , new FacesMessage(FacesMessage.SEVERITY_ERROR, 
+                    "Fallo de registro: correo ya registrado en el sistema", ""));
+        } 
+        
+        else {
+            // LoginJpaController ljpa = new LoginJpaController(emf);
             AlumnoJpaController pjpa = new AlumnoJpaController(emf);
-
-           // Login login = new Login();
+            
+            // Login login = new Login();
             //login.setUsuario(usuario);
             //login.setPassword(contraseña);
             //ljpa.create(login);
@@ -108,9 +135,9 @@ public class RegistroController {
             pjpa.create(alum);
 
             FacesContext.getCurrentInstance().addMessage(null,
-                                                         new FacesMessage(FacesMessage.SEVERITY_INFO,
-                                                                          "Felicidades, el registro se ha realizado correctamente", ""));
-        } 
+                    new FacesMessage(FacesMessage.SEVERITY_INFO,
+                            "Felicidades, el registro se ha realizado correctamente", ""));
+        }
         return null;
     }
 
