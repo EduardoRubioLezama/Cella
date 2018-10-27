@@ -99,13 +99,13 @@ public class RegistroController {
             , new FacesMessage(FacesMessage.SEVERITY_ERROR, 
                     "Fallo de registro: Las contraseñas deben coincidir", ""));
         } 
-        if(!(verificaUsuario(alumno.getNombreusuario()))){
+        else if(!(verificaUsuario(alumno.getNombreusuario()))){
             FacesContext.getCurrentInstance().addMessage(null
             , new FacesMessage(FacesMessage.SEVERITY_ERROR, 
                     "Fallo de registro: Nombre de usuario existente, elige otro", ""));
         } 
         
-        if(!(verificaCorreo(alumno.getCorreo()))){
+        else if(!(verificaCorreo(alumno.getCorreo()))){
             FacesContext.getCurrentInstance().addMessage(null
             , new FacesMessage(FacesMessage.SEVERITY_ERROR, 
                     "Fallo de registro: correo ya registrado en el sistema", ""));
