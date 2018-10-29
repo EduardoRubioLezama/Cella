@@ -91,23 +91,29 @@ public class MaterialController {
     }
     
     public String addMaterial(){
-    MaterialJpaController mjpa = new MaterialJpaController(emf);
-    UnidadmaterialJpaController umjpa = new UnidadmaterialJpaController(emf);
-    Material mt = new Material();
-    Unidadmaterial umt = new Unidadmaterial();
-    mt.setNombrematerial(nombrematerial);
-    mt.setDescripcion(descripcion);
-    mjpa.create(mt);
-    mt = mjpa.findMaterial(nombrematerial);
-    umt.setNombrematerial(nombrematerial);
-    umt.setEstado(estado.toLowerCase());
         
-    umt.setIdMaterial(mt);
-    umjpa.create(umt);
+               
+        MaterialJpaController mjpa = new MaterialJpaController(emf);
+        UnidadmaterialJpaController umjpa = new UnidadmaterialJpaController(emf);
+        Material mt = new Material();
+        Unidadmaterial umt = new Unidadmaterial();
+        
+        if(mjpa.findMaterial(nombrematerial) == null){
+            mt.setNombrematerial(nombrematerial);
+            mt.setDescripcion(descripcion);
+            mjpa.create(mt);
+        }
+        
+        mt = mjpa.findMaterial(nombrematerial);
+        umt.setNombrematerial(nombrematerial);
+        umt.setEstado(estado.toLowerCase());
+        
+        umt.setIdMaterial(mt);
+        umjpa.create(umt);
     
-    FacesContext.getCurrentInstance().addMessage(null,
+        FacesContext.getCurrentInstance().addMessage(null,
                                                          new FacesMessage(FacesMessage.SEVERITY_INFO,
-                                                                          "Felicidades, el registro se ha realizado correctamente" , ""));
+                                                                          "Unidad agregada" , ""));
         return null;
     }
 
