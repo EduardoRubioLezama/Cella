@@ -57,8 +57,32 @@ public class PreRegistroController {
     
     }
     
-     public String addUser() {
-        if (!profesor.getContrasena().equals(confirmacion)) {
+     public boolean verificaUsuario(String userName){
+        
+        ProfesorJpaController ajpa = new ProfesorJpaController(emf);
+        return ajpa.findProfesor(userName) == null;
+    }
+    
+     public boolean verificaCorreo(String correo){
+        
+        ProfesorJpaController ajpa = new ProfesorJpaController(emf);
+        return ajpa.findCorreo(correo) == null;
+    }
+    
+    public String addUser() {
+         
+        if(!(verificaUsuario(profesor.getNombreusuario()))){
+            FacesContext.getCurrentInstance().addMessage(null
+            , new FacesMessage(FacesMessage.SEVERITY_ERROR, 
+                    "Fallo de registro: Nombre de usuario existente, elige otro", ""));
+        } 
+        
+        else if(!(verificaCorreo(profesor.getCorreo()))){
+            FacesContext.getCurrentInstance().addMessage(null
+            , new FacesMessage(FacesMessage.SEVERITY_ERROR, 
+                    "Fallo de registro: correo ya registrado en el sistema", ""));
+        }  
+        else if (!profesor.getContrasena().equals(confirmacion)) {
             FacesContext.getCurrentInstance().addMessage(null
             , new FacesMessage(FacesMessage.SEVERITY_ERROR, 
                     "Fallo de registro: Las contraseñas deben coincidir", ""));
@@ -88,7 +112,7 @@ public class PreRegistroController {
             pjpa.create(prof);
 
             FacesContext.getCurrentInstance().addMessage(null,
-                                                         new FacesMessage(FacesMessage.SEVERITY_INFO,
+                                                         new FacesMessage (FacesMessage.SEVERITY_INFO,
                                                                           "Felicidades, el registro se ha realizado correctamente", ""));
         } 
         return null;

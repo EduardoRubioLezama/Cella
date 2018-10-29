@@ -62,7 +62,7 @@ public class RegistroController {
 
     }
     
-    public String mensaje(){
+  /*  public String mensaje(){
         if ( !(confirmacion.equals(alumno.getContrasena()))) {
             FacesContext.getCurrentInstance().addMessage(null
             , new FacesMessage(FacesMessage.SEVERITY_ERROR, 
@@ -77,7 +77,7 @@ public class RegistroController {
         }
          
         return null; 
-    }
+    }*/
     
     public boolean verificaUsuario(String userName){
         

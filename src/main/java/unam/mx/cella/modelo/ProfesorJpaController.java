@@ -186,6 +186,31 @@ public class ProfesorJpaController implements Serializable {
         }
     }
     
+      public Profesor findProfesor(String usuario) {
+        EntityManager em;
+        em = getEntityManager();
+        Query q;
+        q = em.createNamedQuery("Profesor.findByNombreusuario")
+                .setParameter("nombreusuario",usuario);
+                
+        if (q.getResultList().isEmpty()) {
+            return null;
+        }
+        return (Profesor) q.getSingleResult();
+    }
+    
+    public Profesor findCorreo(String correo) {
+        EntityManager em = getEntityManager();
+        Query q;
+        q = em.createNamedQuery("Profesor.findByCorreo")
+                .setParameter("correo",correo);
+                
+        if (q.getResultList().isEmpty()) {
+            return null;
+        }
+        return (Profesor) q.getSingleResult();
+    }
+    
    
 
     
