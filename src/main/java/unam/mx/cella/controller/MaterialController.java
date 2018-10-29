@@ -46,7 +46,7 @@ public class MaterialController {
         this.unidadmaterial = new Unidadmaterial();
         nombrematerial = "";
         descripcion = "";
-        estado = "Disponible";
+        estado = "";
         
     }
     
@@ -89,10 +89,18 @@ public class MaterialController {
     public void setEstado(String estado){
         this.estado = estado;
     }
+
+    public void enMantenimiento(){
+        this.setEstado("en mantenimiento");
+    }
+    
+    public void disponible(){
+        this.setEstado("disponible");
+    
+    }
     
     public String addMaterial(){
-        
-               
+                       
         MaterialJpaController mjpa = new MaterialJpaController(emf);
         UnidadmaterialJpaController umjpa = new UnidadmaterialJpaController(emf);
         Material mt = new Material();
@@ -113,7 +121,7 @@ public class MaterialController {
     
         FacesContext.getCurrentInstance().addMessage(null,
                                             new FacesMessage(FacesMessage.SEVERITY_INFO,
-                                               "Se ha agregado una unidad del tipo: " + nombrematerial + " con el id " + umt.getId() +" y estado: "+ estado , ""));
+                                               "Se ha agregado una unidad del tipo: " + nombrematerial + " con el id " + umt.getId() +" y estado: "+ umt.getEstado() , ""));
         return null;
     }
 
