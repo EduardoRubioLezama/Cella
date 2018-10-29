@@ -112,8 +112,8 @@ public class MaterialController {
         umjpa.create(umt);
     
         FacesContext.getCurrentInstance().addMessage(null,
-                                                         new FacesMessage(FacesMessage.SEVERITY_INFO,
-                                                                          "Unidad agregada" , ""));
+                                            new FacesMessage(FacesMessage.SEVERITY_INFO,
+                                               "Se ha agregado una unidad del tipo: " + nombrematerial + " con el id " + umt.getId() +" y estado: "+ estado , ""));
         return null;
     }
 
