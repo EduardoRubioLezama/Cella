@@ -46,7 +46,7 @@ public class MaterialController {
         this.unidadmaterial = new Unidadmaterial();
         nombrematerial = "";
         descripcion = "";
-        estado = "Disponible";
+        estado = "";
         
     }
     
@@ -89,24 +89,39 @@ public class MaterialController {
     public void setEstado(String estado){
         this.estado = estado;
     }
+
+    public void enMantenimiento(){
+        this.setEstado("en mantenimiento");
+    }
+    
+    public void disponible(){
+        this.setEstado("disponible");
+    
+    }
     
     public String addMaterial(){
-    MaterialJpaController mjpa = new MaterialJpaController(emf);
-    UnidadmaterialJpaController umjpa = new UnidadmaterialJpaController(emf);
-    Material mt = new Material();
-    Unidadmaterial umt = new Unidadmaterial();
-    mt.setNombrematerial(nombrematerial);
-    mt.setDescripcion(descripcion);
-    mjpa.create(mt);
-    mt = mjpa.findMaterial(mt.getId());
-    umt.setNombrematerial(nombrematerial);
-    umt.setEstado(estado);
-    umt.setIdMaterial(mt);
-    umjpa.create(umt);
+                       
+        MaterialJpaController mjpa = new MaterialJpaController(emf);
+        UnidadmaterialJpaController umjpa = new UnidadmaterialJpaController(emf);
+        Material mt = new Material();
+        Unidadmaterial umt = new Unidadmaterial();
+        
+        if(mjpa.findMaterial(nombrematerial) == null){
+            mt.setNombrematerial(nombrematerial);
+            mt.setDescripcion(descripcion);
+            mjpa.create(mt);
+        }
+        
+        mt = mjpa.findMaterial(nombrematerial);
+        umt.setNombrematerial(nombrematerial);
+        umt.setEstado(estado.toLowerCase());
+        
+        umt.setIdMaterial(mt);
+        umjpa.create(umt);
     
-    FacesContext.getCurrentInstance().addMessage(null,
-                                                         new FacesMessage(FacesMessage.SEVERITY_INFO,
-                                                                          "Felicidades, el registro se ha realizado correctamente", ""));
+        FacesContext.getCurrentInstance().addMessage(null,
+                                            new FacesMessage(FacesMessage.SEVERITY_INFO,
+                                               "Se ha agregado una unidad del tipo: " + nombrematerial + " con el id " + umt.getId() +" y estado: "+ umt.getEstado() , ""));
         return null;
     }
 

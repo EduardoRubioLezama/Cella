@@ -5,6 +5,7 @@
  */
 package unam.mx.cella.controller;
 
+import java.util.List;
 import java.util.Locale;
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
@@ -28,6 +29,7 @@ public class UnidadmaterialController {
      */
     private final EntityManagerFactory emf;
     private Unidadmaterial u_material;
+    private UnidadmaterialJpaController ujp;
     public UnidadmaterialController() {
         emf = EntityProvider.provider();
         FacesContext.getCurrentInstance().getViewRoot().setLocale(
@@ -55,5 +57,6 @@ public class UnidadmaterialController {
                                                                           "Felicidades, el registro se ha realizado correctamente", ""));
         return null;
     }
+    
     
 }
