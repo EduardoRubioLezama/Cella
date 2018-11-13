@@ -123,6 +123,8 @@ public class RegistroController {
 
             Alumno alum = new Alumno();
             //alum.setLoginId(login.getId());
+           //Se envia correo con link de confirmacion 
+           
            
             alum.setNombre(alumno.getNombre());
             alum.setApellidop(alumno.getApellidop());

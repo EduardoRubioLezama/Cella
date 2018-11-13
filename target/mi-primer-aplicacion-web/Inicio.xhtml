@@ -10,20 +10,18 @@
         <h:outputStylesheet name="./css/cssLayout.css"/>
         <title>Cella</title>
     </h:head>
+    
+     <ui:include src="header.xhtml"></ui:include>
 
     <h:body>
-
-        <div class="col-sm-1" align="right">
-            <button type="submit" class="btn btn-primary btn-lg" action="">Registrar</button>
-        </div>
-        
-
-       
-        <div class="col-sm-1" align="right">
-            <button type="submit" class="btn btn-primary btn-lg" action="">Iniciar Sesion</button>
-        </div>
-        
+        <div class="trans"> 
+            <button class="btn btn-info btn-responsive btninter centrado">Iniciar Sesion</button>
+            <button class="btn btn-info btn-responsive btninter right centrado">Registrase</button> 
+        </div> 
 
     </h:body>
+     
+    <ui:include src="footer.xhtml"></ui:include>
+
 
 </html>
