@@ -53,7 +53,7 @@ public class RegistroController {
      */
     public RegistroController() {
         emf = EntityProvider.provider();
-        System.out.println("creado");
+        
         FacesContext.getCurrentInstance().getViewRoot().setLocale(
                 new Locale("es-Mx"));
         this.alumno = new Alumno();
@@ -85,7 +85,7 @@ public class RegistroController {
         return ajpa.findAlumno(userName) == null;
     }
     
-     public boolean verificaCorreo(String correo){
+    public boolean verificaCorreo(String correo){
         
         AlumnoJpaController ajpa = new AlumnoJpaController(emf);
         return ajpa.findCorreo(correo) == null;

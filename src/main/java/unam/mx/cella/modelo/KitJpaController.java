@@ -163,4 +163,16 @@ public class KitJpaController implements Serializable {
         }
     }
     
+    public Kit verificaNombre(String nombreKit) {
+        EntityManager em = getEntityManager();
+        Query q;
+        q = em.createNamedQuery("Kit.findByNombrekit")
+                .setParameter("nombrekit",nombreKit);
+                
+        if (q.getResultList().isEmpty()) {
+            return null;
+        }
+        return (Kit) q.getSingleResult();
+    }
+    
 }
