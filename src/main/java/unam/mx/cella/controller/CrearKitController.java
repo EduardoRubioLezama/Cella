@@ -62,26 +62,16 @@ public class CrearKitController {
         } 
              
         else {
-            // LoginJpaController ljpa = new LoginJpaController(emf);
-            KitJpaController kjpa = new KitJpaController(emf);
             
-            // Login login = new Login();
-            //login.setUsuario(usuario);
-            //login.setPassword(contraseña);
-            //ljpa.create(login);
-            //login = ljpa.findLoginByUsuario(usuario);
-
+            KitJpaController kjpa = new KitJpaController(emf);
             Kit nkit = new Kit();
-            //alum.setLoginId(login.getId());
-           //Se envia correo con link de confirmacion 
-           
            
             nkit.setNombrekit(kit.getNombrekit());
             nkit.setMateria(kit.getMateria());
            
 
             kjpa.create(nkit);
-
+            
            /* FacesContext.getCurrentInstance().addMessage(null,
                     new FacesMessage(FacesMessage.SEVERITY_INFO,
                             "Felicidades, el registro se ha realizado correctamente", ""));*/

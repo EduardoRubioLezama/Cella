@@ -25,21 +25,21 @@
                     <div class="form-group row">
                         <label for="inputNameKit" class="col-sm-2 col-form-label" ></label>
                         <div class="col-sm-2">
-                            <p:inputText type="text" class="form-control" id="inputNameKit" placeholder="Nombre Kit*" required="true" requiredMessage="NombreKit:Campo Obligatorio" value="#{crearKitController.kit.nombrekit}"/>
+                            <p:inputText type="text" class="form-control" id="inputNameKit" placeholder="Nombre Kit*" required="true" requiredMessage="NombreKit:Campo Obligatorio" value="#{kitController.kit.nombrekit}"/>
                         </div>
                     </div>
                     
                     <div class="form-group row">
                         <label for="inputMateria" class="col-sm-2 col-form-label"></label>
                         <div class="col-sm-2">
-                            <p:inputText type="text" class="form-control" id="inputMateria" placeholder="Materia" required="true" requiredMessage="Materia:Campo Obligatorio" value="#{crearKitController.kit.materia}"/>
+                            <p:inputText type="text" class="form-control" id="inputMateria" placeholder="Materia" required="true" requiredMessage="Materia:Campo Obligatorio" value="#{kitController.kit.materia}"/>
                         </div>
                     </div>    
                        
                     <div class="form-group row">
                         <div class="col-sm-3" align="right">
                             
-                            <button type="submit" class="btn btn-primary btn-lg" jsf:action="#{crearKitController.addKit}">Crear Kit</button>
+                            <button type="submit" class="btn btn-primary btn-lg" jsf:action="#{kitController.addKit()}">Crear Kit</button>
                         </div>
                     </div>
                     

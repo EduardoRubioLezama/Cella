@@ -15,5 +15,10 @@ ul li{
 
 ul li form{
     
-    padding-left: 100px;
+    padding-left: 50px;
+    margin-right: 10px;
+}
+
+nav{
+    height: 80px;
 }

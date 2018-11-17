@@ -4,6 +4,7 @@
  * and open the template in the editor.
  */
 package unam.mx.cella.controller;
+import java.io.IOException;
 import java.util.Locale;
 
 
@@ -29,7 +30,7 @@ public class RegistroController {
     private final EntityManagerFactory emf;
     private Alumno alumno;
     private String confirmacion;
-    
+        
     public String getConfirmacion(){
         return confirmacion;
     }
@@ -88,12 +89,12 @@ public class RegistroController {
     public boolean verificaCorreo(String correo){
         
         AlumnoJpaController ajpa = new AlumnoJpaController(emf);
-        return ajpa.findCorreo(correo) == null;
+        return ajpa.findAlumno(correo) == null;
     }
 
     
     
-    public String addUser() {
+    public String addUser() throws IOException {
         if (!alumno.getContrasena().equals(confirmacion)) {
             FacesContext.getCurrentInstance().addMessage(null
             , new FacesMessage(FacesMessage.SEVERITY_ERROR, 
@@ -140,6 +141,7 @@ public class RegistroController {
                     new FacesMessage(FacesMessage.SEVERITY_INFO,
                             "Felicidades, el registro se ha realizado correctamente", ""));
         }
+        FacesContext.getCurrentInstance().getExternalContext().redirect("SeleccionarMateriales.xhtml");
         return null;
     }
 
