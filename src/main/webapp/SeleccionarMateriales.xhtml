@@ -9,53 +9,56 @@
 
     <h:head>
         <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous"/>
-        <title>Prueba </title>
+        <!--<link rel="stylesheet" type="text/css" href="resources/css/SeleccionarMateriales.css"/>-->
+        <title>Selecciona Material </title>
         
     </h:head>
-
-    <h:body>
+    <ui:include src="navBar.xhtml"></ui:include>
+    <h:body style="margin-bottom: 100px;">
 
         <div id="top" class="top">
-            <ui:insert name="top">Top</ui:insert>
+            <ui:insert name="top">#{inicioSesion.email}</ui:insert>
         </div>
-
+        <h:form id="altaKit" enctype="multipart/form-data">
         <section class="container">
             
             <div class="card-group">
                 <div class="card">
                     <img class="card-img-top" src="resources/images/mechero.jpg" alt="Card image cap"></img>
                     <div class="card-body">
-                        <h5 class="card-title">Card title</h5>
-                        <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
-                        <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
+                        <h5 class="card-title">Mechero</h5>
+                        <button type="submit" class="btn btn-primary btn-lg">Ver Mas ></button>
                     </div>
                 </div>
             
                 <div class="card">
                     <img class="card-img-top" src="resources/images/microscopio.jpg" alt="Card image cap"></img>
                     <div class="card-body">
-                        <h5 class="card-title">Card title</h5>
-                        <p class="card-text">This card has supporting text below as a natural lead-in to additional content.</p>
-                        <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
+                        <h5 class="card-title">Microscopio</h5>
+                        <input type="checkbox" id="cbox1" value="first_checkbox"> Agregar</input>
                     </div>
                 </div>
                 
                 <div class="card">
                     <img class="card-img-top" src="resources/images/tubo.jpg" alt="Card image cap"></img>
                     <div class="card-body">
-                        <h5 class="card-title">Card title</h5>
-                        <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This card has even longer content than the first to show that equal height action.</p>
-                        <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
+                        <h5 class="card-title">Tubo de ensayo</h5>
+                        <input type="checkbox" id="cbox1" value="first_checkbox"> Agregar</input>
                     </div>
                 </div>
             </div>
             
         </section>
-        
-        <div id="content" class="center_content">
-            <ui:insert name="content">Content</ui:insert>
+            
+        <div class="form-group row">
+            <div class="col-sm-3" align="right">
+                            
+                <button type="submit" class="btn btn-primary btn-lg">Terminar</button>
+            </div>
         </div>
+        </h:form>
+       
 
     </h:body>
-
+    <ui:include src="footer.xhtml"></ui:include>
 </html>

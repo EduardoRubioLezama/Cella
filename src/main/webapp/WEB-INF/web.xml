@@ -18,4 +18,17 @@
         <servlet-name>Faces Servlet</servlet-name>
         <url-pattern>*.xhtml</url-pattern>
     </servlet-mapping>
+    
+    
+    <!--<-->
+   
+    <session-config>
+        <session-timeout>
+            60
+        </session-timeout>
+    </session-config>
+    <welcome-file-list>
+        <welcome-file>faces/Inicio.xhtml</welcome-file>
+    </welcome-file-list>
+    
 </web-app>

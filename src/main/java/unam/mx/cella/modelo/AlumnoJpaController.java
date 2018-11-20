@@ -13,14 +13,13 @@ import javax.persistence.Query;
 import javax.persistence.EntityNotFoundException;
 import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Root;
+import unam.mx.cella.modelo.Alumno;
 import unam.mx.cella.modelo.exceptions.NonexistentEntityException;
 
 /**
  *
  * @author eduar
  */
-
-
 public class AlumnoJpaController implements Serializable {
 
     public AlumnoJpaController(EntityManagerFactory emf) {
@@ -136,28 +135,24 @@ public class AlumnoJpaController implements Serializable {
         }
     }
     
-    public Alumno findAlumno(String usuario) {
+  
+    public Alumno findAlumno(String correo){
         EntityManager em = getEntityManager();
-        Query q;
-        q = em.createNamedQuery("Alumno.findByNombreusuario")
-                .setParameter("nombreusuario",usuario);
-                
-        if (q.getResultList().isEmpty()) {
-            return null;
-        }
-        return (Alumno) q.getSingleResult();
-    }
-    
-    public Alumno findCorreo(String correo) {
-        EntityManager em = getEntityManager();
-        Query q;
-        q = em.createNamedQuery("Alumno.findByCorreo")
+        Query q = em.createNamedQuery("Alumno.findByCorreo")
                 .setParameter("correo",correo);
-                
         if (q.getResultList().isEmpty()) {
             return null;
         }
-        return (Alumno) q.getSingleResult();
+        return (Alumno) q.getSingleResult();        
     }
     
+    public Alumno findAlumnoContra(String contra){
+        EntityManager em = getEntityManager();
+        Query q = em.createNamedQuery("Alumno.findByContrasena")
+                .setParameter("contrasena",contra);
+        if (q.getResultList().isEmpty()) {
+            return null;
+        }
+        return (Alumno) q.getSingleResult();        
+    }
 }

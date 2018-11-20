@@ -13,11 +13,12 @@ import javax.persistence.Query;
 import javax.persistence.EntityNotFoundException;
 import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Root;
-import unam.mx.cella.modelo.exceptions.NonexistentEntityException;
+import unam.mx.cella.modelo.Categoria;
+import unam.mx.cella.modelo.controller.exceptions.NonexistentEntityException;
 
 /**
  *
- * @author eduar
+ * @author Janeth
  */
 public class CategoriaJpaController implements Serializable {
 
