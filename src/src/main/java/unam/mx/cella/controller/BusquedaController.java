@@ -25,7 +25,7 @@ import unam.mx.cella.modelo.UnidadmaterialJpaController;
  */
 @ManagedBean
 @RequestScoped
-public class MaterialController {
+public class BusquedaController {
 
     /**
      * Creates a new instance of MaterialController
