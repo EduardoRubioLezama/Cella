@@ -28,7 +28,7 @@ import unam.mx.cella.modelo.UnidadmaterialJpaController;
 public class BusquedaController {
 
     /**
-     * Creates a new instance of MaterialController
+     * Creates a new instance of BusquedaController
      */
     
     private final EntityManagerFactory emf;
