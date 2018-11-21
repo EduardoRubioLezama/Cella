@@ -3,24 +3,28 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package unam.mx.cella.modelo;
+package unam.mx.cella.modelo.controller;
 
 import java.io.Serializable;
 import javax.persistence.Query;
 import javax.persistence.EntityNotFoundException;
 import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Root;
+import unam.mx.cella.modelo.ContenerKitMaterial;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
-import unam.mx.cella.modelo.exceptions.IllegalOrphanException;
-import unam.mx.cella.modelo.exceptions.NonexistentEntityException;
+import unam.mx.cella.modelo.Material;
+import unam.mx.cella.modelo.Unidadmaterial;
+import unam.mx.cella.modelo.PertenecerMaterialCategoria;
+import unam.mx.cella.modelo.controller.exceptions.IllegalOrphanException;
+import unam.mx.cella.modelo.controller.exceptions.NonexistentEntityException;
 
 /**
  *
- * @author eduar
+ * @author Janeth
  */
 public class MaterialJpaController implements Serializable {
 
@@ -302,6 +306,7 @@ public class MaterialJpaController implements Serializable {
             return ((Long) q.getSingleResult()).intValue();
         } finally {
             em.close();
+            
         }
     }
     
@@ -329,5 +334,19 @@ public class MaterialJpaController implements Serializable {
         return materiales;
         
     } 
+    
+    public List<Material> findMaterials(String material){
+        EntityManager em = getEntityManager();
+        Query q;
+        q = em.createNamedQuery("Material.findByNombrematerial")
+                .setParameter("nombrematerial",material);
+                
+        if (q.getResultList().isEmpty()) {
+            return null;
+        }
+        List<Material> materiales;
+        materiales = q.getResultList();
+        return materiales;
+    }
     
 }
