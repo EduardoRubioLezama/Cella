@@ -318,7 +318,7 @@ public class MaterialJpaController implements Serializable {
     }
     
     public List<String> getNombresMaterial(){
-        List<String> materiales = new ArrayList<>();
+        List<String> materiales = new ArrayList();
         EntityManager em = getEntityManager();
         Query q;
         q = em.createNamedQuery("Material.findAll",Material.class);
@@ -326,9 +326,6 @@ public class MaterialJpaController implements Serializable {
         for (Material a :material){
             materiales.add(a.getNombrematerial());
         }
-        return materiales;
-        
-    } 
-            
-            
+        return materiales;        
+    }                         
 }

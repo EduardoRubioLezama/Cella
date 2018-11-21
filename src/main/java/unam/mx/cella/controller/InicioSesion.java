@@ -94,33 +94,47 @@ public class InicioSesion {
         this.prof = prof;
     }
 
-    public String canLogin() {        
-        Alumno alumno = ajc.findAlumno(email);
-        
-        boolean logged = alumno != null;
-        System.out.println("el valor de looged es: " + logged);
-        if (logged ) {                                 
-            if ( alumno.getContrasena().equals(pass)) {
-                FacesContext.getCurrentInstance().addMessage(null,
-                    new FacesMessage(FacesMessage.SEVERITY_INFO,
-                            "iguales", ""));
-            }
+    public String canLogin() {                              
+        boolean loggedAlumno = ajc.findAlumnoCorreoYContra(email, pass);      
+        boolean loggedAdmin = adjc.findAdministradorCorreoYContra(email, pass);
+        boolean loggedProfesor = pjc.findProfesorCorreoYContra(email, pass);
+                
+        if (loggedAlumno) {                                             
+            Alumno alumno = ajc.findAlumno(email);
             FacesContext context = getCurrentInstance();
             context.getExternalContext().getSessionMap().put("usuario", alumno);
             
             FacesContext.getCurrentInstance().addMessage(null,
                     new FacesMessage(FacesMessage.SEVERITY_INFO,
                             "Felicidades, el alumno si existe en ele sistema", ""));
-            return "SeleccionarMateriales?faces-redirect=true";
+            return "secured/Principal?faces-redirect=true";
+        } else if (loggedAdmin){
+            Administrador administrador = adjc.findAdministrador(email);
+            FacesContext context = getCurrentInstance();
+            context.getExternalContext().getSessionMap().put("usuario", administrador);
+            
+            FacesContext.getCurrentInstance().addMessage(null,
+                    new FacesMessage(FacesMessage.SEVERITY_INFO,
+                            "Felicidades, el alumno si existe en ele sistema", ""));
+            return "secured/Principal?faces-redirect=true";
+        } else if (loggedProfesor){
+            Profesor profesor = pjc.findCorreo(email);
+            FacesContext context = getCurrentInstance();
+            context.getExternalContext().getSessionMap().put("usuario", profesor);
+            
+            FacesContext.getCurrentInstance().addMessage(null,
+                    new FacesMessage(FacesMessage.SEVERITY_INFO,
+                            "Felicidades, el alumno si existe en ele sistema", ""));
+            return "secured/Principal?faces-redirect=true";
         }
         System.out.println("no entre al metodo");
-        return "registrar?faces-redirect=true";
+        return "Registrar?faces-redirect=true";
     }
 
     public String logout() {
         FacesContext context = getCurrentInstance();
         context.getExternalContext().invalidateSession();
-        return "Inicio?faces-redirect=true";
+        return "/../Inicio?faces-redirect=true";
     }
 
     /**

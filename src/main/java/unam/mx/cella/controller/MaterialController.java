@@ -37,6 +37,7 @@ public class MaterialController {
     private String nombrematerial;
     private String descripcion;
     private String estado;
+    
     public MaterialController() {
         emf = EntityProvider.provider();
         System.out.println("creado");

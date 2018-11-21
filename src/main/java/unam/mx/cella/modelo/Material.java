@@ -34,6 +34,7 @@ import javax.xml.bind.annotation.XmlTransient;
     , @NamedQuery(name = "Material.findById", query = "SELECT m FROM Material m WHERE m.id = :id")
     , @NamedQuery(name = "Material.findByNombrematerial", query = "SELECT m FROM Material m WHERE m.nombrematerial = :nombrematerial")
     , @NamedQuery(name = "Material.findByDescripcion", query = "SELECT m FROM Material m WHERE m.descripcion = :descripcion")})
+
 public class Material implements Serializable {
 
     private static final long serialVersionUID = 1L;

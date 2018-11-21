@@ -133,5 +133,22 @@ public class AdministradorJpaController implements Serializable {
             em.close();
         }
     }
-    
+
+    public Administrador findAdministrador(String correo) {
+        EntityManager em = getEntityManager();
+        Query q = em.createNamedQuery("Administrador.findByCorreo")
+                .setParameter("correo", correo);
+        if (q.getResultList().isEmpty()) {
+            return null;
+        }
+        return (Administrador) q.getSingleResult();
+    }
+
+    public boolean findAdministradorCorreoYContra(String correo, String contra) {
+        EntityManager em = getEntityManager();
+        Query q = em.createNamedQuery("Administrador.findByCorreoAndContrasena")
+                .setParameter(1, correo)
+                .setParameter(2, contra);
+        return !q.getResultList().isEmpty();
+    }
 }

@@ -13,6 +13,8 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Lob;
+import javax.persistence.NamedNativeQueries;
+import javax.persistence.NamedNativeQuery;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.Table;
@@ -34,7 +36,8 @@ import javax.xml.bind.annotation.XmlRootElement;
     , @NamedQuery(name = "Alumno.findByNombre", query = "SELECT a FROM Alumno a WHERE a.nombre = :nombre")
     , @NamedQuery(name = "Alumno.findByApellidop", query = "SELECT a FROM Alumno a WHERE a.apellidop = :apellidop")
     , @NamedQuery(name = "Alumno.findByApellidom", query = "SELECT a FROM Alumno a WHERE a.apellidom = :apellidom")
-    , @NamedQuery(name = "Alumno.findByEdocuenta", query = "SELECT a FROM Alumno a WHERE a.edocuenta = :edocuenta")})
+    , @NamedQuery(name = "Alumno.findByEdocuenta", query = "SELECT a FROM Alumno a WHERE a.edocuenta = :edocuenta")
+    , @NamedQuery(name = "Alumno.findByCorreoAndContrasena", query = "SELECT a.correo,a.contrasena FROM Alumno a WHERE a.correo = ?1 and a.contrasena = ?2")})
 public class Alumno implements Serializable {
 
     private static final long serialVersionUID = 1L;

@@ -7,4 +7,11 @@
                 <goal>tomcat7:run</goal>
             </goals>
         </action>
+        <action>
+            <actionName>CUSTOM-RunServer</actionName>
+            <displayName>RunServer</displayName>
+            <goals>
+                <goal>tomcat7:run</goal>
+            </goals>
+        </action>
     </actions>
