@@ -1,4 +1,4 @@
-<?xml version='1.0' encoding='UTF-8' ?> 
+<?xml version="1.0" encoding="UTF-8" ?> 
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"      
       xmlns:ui="http://xmlns.jcp.org/jsf/facelets" 
@@ -17,13 +17,26 @@
     
     <h:body>
 
-        <h5>Nombre Usuario</h5>
-        <h5> Pene </h5>
-        <h:form>    
-            <div><p:fileUpload value="#{registroController.alumno.foto}" mode="simple" skinSimple="true"
-                                /></div>
-        </h:form>    
+        <h5>#{perfilController.alumno.nombreusuario}</h5>
+        <h5>#{perfilController.content}</h5>
+       
 
+
+        <p:graphicImage value="#{perfilController.alumno.foto}" width="48" height="48"/>
+        
+        <h:form id="altaForm" enctype="multipart/form-data">   
+            <tr>
+                <td>FotografÃ­a</td>
+                <td><p:fileUpload value="#{perfilController.fotografia}" mode="simple" skinSimple="true"
+                                  fileUploadListener="#{perfilController.fileUploadListener}"/></td>
+            </tr>
+            
+            <div class="form-group row">
+                    <div class="col-sm-3" align="right">
+                        <button type="submit" class="btn btn-primary btn-lg" jsf:action="#{perfilController.addFoto}">Agregar</button>
+                    </div>
+            </div>
+        </h:form>
     </h:body>   
     
     <ui:include src="footer.xhtml"></ui:include>

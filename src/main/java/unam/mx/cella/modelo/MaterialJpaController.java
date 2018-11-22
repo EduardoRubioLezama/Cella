@@ -317,6 +317,15 @@ public class MaterialJpaController implements Serializable {
         return (Material) q.getSingleResult();
     }
     
+    public List<Material> getMateriales(){
+        EntityManager em = getEntityManager();
+        Query q;
+        q = em.createNamedQuery("Material.findAll",Material.class);
+        List<Material> materiales= q.getResultList();
+       
+        return materiales;
+    }
+    
     public List<String> getNombresMaterial(){
         List<String> materiales = new ArrayList<>();
         EntityManager em = getEntityManager();

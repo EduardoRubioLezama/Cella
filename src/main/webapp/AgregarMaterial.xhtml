@@ -16,10 +16,16 @@
         <div class="card bg-light mb-2">
             <div class="card-header" align="center"> Agregar Material </div>
             <h:form>
+                <p:selectOneMenu id="car" value="#{materialController.nombrematerial}" effect="fold" editable="true">
+                    <f:selectItem itemLabel="Nuevo +" itemValue="nuevo" />
+                    <f:selectItems value="#{materialController.materiales}" />
+                </p:selectOneMenu>
+                
+                <!--
                 <div class="form-group row">
                     <label for="inputName3" class="col-sm-2 col-form-label" ></label>
                     <div class="col-sm-2">
-                        <p:inputText type="text" class="form-control" id="inputName3" placeholder="Nombre material" required="true" value="#{materialController.nombrematerial}"/>
+                        <p:inputText type="text" class="form-control" id="inputName3" placeholder="Nombre material" value="#{materialController.nombrematerial}"/>
                     </div>   
                 </div>
                 <div class="form-group row ">
@@ -28,21 +34,14 @@
                         <p:inputText type="text" class="form-control" id="inputDescripcion" placeholder="Descripcion" required="true" value="#{materialController.descripcion}"/>
                     </div>
                 </div>
+                -->
                 <div class="col-sm-4" align="right">
                     <h:selectOneRadio value="#{materialController.estado}">
                         <f:selectItem itemValue="en mantenimiento" itemLabel="en mantenimiento" />
                         <f:selectItem itemValue="disponible" itemLabel="disponible" />
                     </h:selectOneRadio>
                 </div>    
-<!--                
-                <div class="form-check form-check-inline">
-                    <input class="form-check-input" type="radio" name="inlineRadioOptions" itemValue="en mantenimiento" id="inlineRadio1" value="#{materialController.enMantenimiento()}"></input>
-                    <label class="form-check-label" for="inlineRadio1">en mantenimiento</label>
-                </div>
-                <div class="form-check form-check-inline">
-                    <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio2" value="#{materialController.setEstado('disponible')}"></input>
-                    <label class="form-check-label" for="inlineRadio2">disponible</label>
-                </div>-->
+
                 
                 <div class="form-group row">
                     <div class="col-sm-3" align="right">

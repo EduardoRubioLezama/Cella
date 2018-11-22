@@ -40,14 +40,14 @@ public class CrearKitController {
     }
     
     public CrearKitController() {
-         emf = EntityProvider.provider();
+        emf = EntityProvider.provider();
         
         FacesContext.getCurrentInstance().getViewRoot().setLocale(
                 new Locale("es-Mx"));
         this.kit = new Kit();
     }
     
-     public boolean verificaKit(String nombreKit){
+    public boolean verificaKit(String nombreKit){
         
         KitJpaController ajpa = new KitJpaController(emf);
         return ajpa.verificaNombre(nombreKit) == null;

@@ -6,6 +6,7 @@ package unam.mx.cella.controller;
  * and open the template in the editor.
  */
 
+import java.util.List;
 import java.util.Locale;
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
@@ -33,13 +34,16 @@ public class MaterialController {
     
     private final EntityManagerFactory emf;
     private Material material;
+    private List<String> materiales;
     private Unidadmaterial unidadmaterial;
     private String nombrematerial;
     private String descripcion;
     private String estado;
+    private MaterialJpaController mjpa;
+    
     public MaterialController() {
         emf = EntityProvider.provider();
-        System.out.println("creado");
+        mjpa = new MaterialJpaController(emf);
         FacesContext.getCurrentInstance().getViewRoot().setLocale(
                 new Locale("es-Mx"));
         this.material = new Material();
@@ -47,7 +51,7 @@ public class MaterialController {
         nombrematerial = "";
         descripcion = "";
         estado = "";
-        
+        materiales = mjpa.getNombresMaterial();
     }
     
     public Material getMaterial(){
@@ -56,6 +60,14 @@ public class MaterialController {
     
     public void setMaterial(Material material){
         this.material = material;
+    }
+
+     public List<String> getMateriales() {
+        return materiales;
+    }
+
+    public void setMateriales(List<String> materiales) {
+        this.materiales = materiales;
     }
     
     public Unidadmaterial getUnidadMaterial(){
@@ -101,7 +113,6 @@ public class MaterialController {
     
     public String addMaterial(){
                        
-        MaterialJpaController mjpa = new MaterialJpaController(emf);
         UnidadmaterialJpaController umjpa = new UnidadmaterialJpaController(emf);
         Material mt = new Material();
         Unidadmaterial umt = new Unidadmaterial();

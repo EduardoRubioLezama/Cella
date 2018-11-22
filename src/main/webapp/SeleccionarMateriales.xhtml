@@ -20,14 +20,15 @@
             <ui:insert name="top">#{inicioSesion.email}</ui:insert>
         </div>
         <h:form id="altaKit" enctype="multipart/form-data">
-        <section class="container">
+        <!--<section class="container">
+            
             
             <div class="card-group">
                 <div class="card">
                     <img class="card-img-top" src="resources/images/mechero.jpg" alt="Card image cap"></img>
                     <div class="card-body">
                         <h5 class="card-title">Mechero</h5>
-                        <button type="submit" class="btn btn-primary btn-lg">Ver Mas ></button>
+                        <f:selectItem itemLabel="Mechero" itemValue="Mechero" />
                     </div>
                 </div>
             
@@ -35,7 +36,7 @@
                     <img class="card-img-top" src="resources/images/microscopio.jpg" alt="Card image cap"></img>
                     <div class="card-body">
                         <h5 class="card-title">Microscopio</h5>
-                        <input type="checkbox" id="cbox1" value="first_checkbox"> Agregar</input>
+                        <input type="checkbox" id="cbox1" value="#{kitController.seleccionados}"> Agregar</input>
                     </div>
                 </div>
                 
@@ -43,17 +44,38 @@
                     <img class="card-img-top" src="resources/images/tubo.jpg" alt="Card image cap"></img>
                     <div class="card-body">
                         <h5 class="card-title">Tubo de ensayo</h5>
-                        <input type="checkbox" id="cbox1" value="first_checkbox"> Agregar</input>
+                        <input type="checkbox" id="cbox1" value="#{kitController.seleccionados}"> Agregar</input>
                     </div>
                 </div>
             </div>
+            </p:selectManyCheckbox>
+        </section> -->
+       
+        
+        
+        <!--
+        <p:selectManyCheckbox id="basic" value="#{kitController.seleccionados}">
+            <f:selectItem itemLabel="Xbox One" itemValue="Xbox One" />
+            <f:selectItem itemLabel="PS4" itemValue="PS4" />
+            <f:selectItem itemLabel="Wii U" itemValue="Wii U" />
+        </p:selectManyCheckbox> 
+        -->
+        
+        <!-- <ui:repeat value="#{kitController.materiales}" var="item">-->
+                    
+                
+        <p:selectManyCheckbox id="grid2" value="#{kitController.seleccionados}" layout="pageDirection" columns="3">
+            <!--<f:selectItems itemLabel="#{item}" itemValue="#{item}" />-->
+            <f:selectItems value="#{kitController.materiales}" var="city" itemLabelEscaped="false" itemLabel="#{city} &lt; img src=&quot;resources/images/tubo.jpg&quot;/&gt;" itemValue="#{city}" />
             
-        </section>
+            
+        </p:selectManyCheckbox>
+        
             
         <div class="form-group row">
             <div class="col-sm-3" align="right">
                             
-                <button type="submit" class="btn btn-primary btn-lg">Terminar</button>
+                <button type="submit" class="btn btn-primary btn-lg" jsf:action="#{kitController.crearKit()}">Terminar</button>
             </div>
         </div>
         </h:form>

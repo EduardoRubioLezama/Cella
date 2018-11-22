@@ -6,6 +6,7 @@
 package unam.mx.cella.modelo;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
@@ -162,5 +163,21 @@ public class ContenerKitMaterialJpaController implements Serializable {
             em.close();
         }
     }
+    
+    public List<String> getNombresMaterial(String nombrekit){
+        List<String> materiales = new ArrayList<>();
+        EntityManager em = getEntityManager();
+        Query q;
+        q = em.createNamedQuery("ContenerKitMaterial.findByNombrekit")
+                .setParameter("nombrekit",nombrekit);
+                
+        List<ContenerKitMaterial> material= q.getResultList();
+
+        for (ContenerKitMaterial a :material){
+            materiales.add(a.getNombrematerial());
+        }
+        return materiales;
+        
+    } 
     
 }
