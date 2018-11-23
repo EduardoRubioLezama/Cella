@@ -10,7 +10,7 @@
     </h:head>    
     
     <nav class="navbar navbar-expand-lg navbar-light bg-light">
-        <a class="navbar-brand" href="SeleccionarMateriales.xhtml">
+        <a class="navbar-brand" href="Cella.xhtml">
             <img src="resources/images/cella.jpg" width="90" height="60" class="d-inline-block align-top" />
             Cella
         </a>
@@ -21,7 +21,7 @@
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <ul class="navbar-nav mr-auto">
                 <li class="nav-item active">
-                    <a class="nav-link" href="SeleccionarMateriales.xhtml">Principal</a>
+                    <a class="nav-link" href="Cella.xhtml">Principal</a>
                 </li>
                 <li class="nav-item" >
                     <a class="nav-link" href="CrearKits.xhtml">Crear Kit</a>
@@ -33,8 +33,9 @@
                     </h:form>
                 </li>    
                 <li>
-                    <a href="Perfil.xhtml"><img src="resources/images/user.jpg" style="float:right; margin-left: 5px;" width="60" height="60"> #{inicioSesion.email} </img></a> 
-                  <!--  <img class="img-fluid" alt="eduardo@ciencias.unam.mx" src="resources/images/user.jpg" width="60" height="60"></img>-->
+                  <!--  <p:graphicImage value="#{inicioSesion.miFoto}" width="50" height="50" /> #{inicioSesion.alum.correo} -->
+
+                    <a href="Perfil.xhtml"><p:graphicImage value="#{inicioSesion.miFoto}" width="50" height="50" /> #{inicioSesion.alum.correo}</a> 
                 </li>
                 <li>
                     <h:form class="form-inline my-2 my-lg-0">

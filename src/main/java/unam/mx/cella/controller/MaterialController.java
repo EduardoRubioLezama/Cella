@@ -14,11 +14,14 @@ import javax.faces.bean.RequestScoped;
 import javax.faces.context.FacesContext;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
+import org.primefaces.event.FileUploadEvent;
+import org.primefaces.model.UploadedFile;
 import unam.mx.cella.modelo.EntityProvider;
 import unam.mx.cella.modelo.Material;
 import unam.mx.cella.modelo.Unidadmaterial;
 import unam.mx.cella.modelo.MaterialJpaController;
 import unam.mx.cella.modelo.UnidadmaterialJpaController;
+import unam.mx.cella.modelo.exceptions.NonexistentEntityException;
 
 /**
  *
@@ -40,6 +43,15 @@ public class MaterialController {
     private String descripcion;
     private String estado;
     private MaterialJpaController mjpa;
+    private UploadedFile fotografia;
+
+    public UploadedFile getFotografia() {
+        return fotografia;
+    }
+
+    public void setFotografia(UploadedFile fotografia) {
+        this.fotografia = fotografia;
+    }
     
     public MaterialController() {
         emf = EntityProvider.provider();
@@ -78,6 +90,10 @@ public class MaterialController {
         this.unidadmaterial = unidadmaterial;
     }
     
+     public void fileUploadListener(FileUploadEvent e) {
+        this.fotografia = e.getFile();
+    }
+    
     public String getNombrematerial(){
         return nombrematerial;
     }
@@ -111,18 +127,25 @@ public class MaterialController {
     
     }
     
-    public String addMaterial(){
+    public String addMaterial() throws NonexistentEntityException, Exception{
                        
         UnidadmaterialJpaController umjpa = new UnidadmaterialJpaController(emf);
         Material mt = new Material();
         Unidadmaterial umt = new Unidadmaterial();
-        
-        if(mjpa.findMaterial(nombrematerial) == null){
+        material = mjpa.findMaterial(nombrematerial);
+        if(material == null){
             mt.setNombrematerial(nombrematerial);
             mt.setDescripcion(descripcion);
+            if(fotografia != null){
+                mt.setFoto(fotografia.getContents());
+            }
+            
             mjpa.create(mt);
         }
-        
+        else if(material != null){
+            material.setFoto(fotografia.getContents());
+            mjpa.edit(material);
+        }
         mt = mjpa.findMaterial(nombrematerial);
         umt.setNombrematerial(nombrematerial);
         umt.setEstado(estado.toLowerCase());

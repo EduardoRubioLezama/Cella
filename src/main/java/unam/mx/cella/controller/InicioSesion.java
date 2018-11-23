@@ -5,6 +5,8 @@
  */
 package unam.mx.cella.controller;
 
+import java.io.ByteArrayInputStream;
+import java.io.IOException;
 import java.util.Locale;
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
@@ -12,6 +14,9 @@ import javax.faces.bean.SessionScoped;
 import javax.faces.context.FacesContext;
 import static javax.faces.context.FacesContext.getCurrentInstance;
 import javax.persistence.EntityManagerFactory;
+import org.primefaces.model.ByteArrayContent;
+import org.primefaces.model.DefaultStreamedContent;
+import org.primefaces.model.StreamedContent;
 import unam.mx.cella.modelo.Administrador;
 import unam.mx.cella.modelo.Alumno;
 import unam.mx.cella.modelo.EntityProvider;
@@ -107,11 +112,12 @@ public class InicioSesion {
             }
             FacesContext context = getCurrentInstance();
             context.getExternalContext().getSessionMap().put("usuario", alumno);
-            
+            //Esto es nero
+            alum = alumno;
             FacesContext.getCurrentInstance().addMessage(null,
                     new FacesMessage(FacesMessage.SEVERITY_INFO,
                             "Felicidades, el alumno si existe en ele sistema", ""));
-            return "SeleccionarMateriales?faces-redirect=true";
+            return "Cella?faces-redirect=true";
         }
         System.out.println("no entre al metodo");
         return "registrar?faces-redirect=true";
@@ -150,4 +156,18 @@ public class InicioSesion {
     public void setPass(String pass) {
         this.pass = pass;
     }
+    
+    public StreamedContent getMiFoto() {
+
+        if (alum.getFoto() != null) {
+            return new ByteArrayContent(alum.getFoto());
+        }
+        return null;
+    }
+     
+    public DefaultStreamedContent byteToImage() throws IOException {
+        byte[] imgBytes = alum.getFoto();
+        ByteArrayInputStream img = new ByteArrayInputStream(imgBytes);
+        return new DefaultStreamedContent(img,"image/jpg");
+    }    
 }

@@ -136,12 +136,18 @@ public class RegistroController {
             alum.setEdocuenta(true);
 
             pjpa.create(alum);
-
+           /* CorreoController cc = new CorreoController();
+            cc.setTo(alumno.getCorreo());
+            cc.setFrom(alumno.getCorreo());
+            cc.setUsername(alumno.getCorreo());
+            
+            cc.submitEmail();
+            */
             FacesContext.getCurrentInstance().addMessage(null,
                     new FacesMessage(FacesMessage.SEVERITY_INFO,
-                            "Felicidades, el registro se ha realizado correctamente", ""));
+                                      " Se ha enviado un correo de confirmacion a: " + alumno.getCorreo() + "\n Verifica tu correo para activar la cuenta", ""));
         }
-        FacesContext.getCurrentInstance().getExternalContext().redirect("SeleccionarMateriales.xhtml");
+        //FacesContext.getCurrentInstance().getExternalContext().redirect(".xhtml");
         return null;
     }
 

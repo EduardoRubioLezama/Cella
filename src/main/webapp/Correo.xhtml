@@ -1,0 +1,85 @@
+<html xmlns="http://www.w3.org/1999/xhtml"      
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets" 
+      xmlns:jsf="http://xmlns.jcp.org/jsf"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+    
+    
+        
+      <h:form id="emailForm">
+          <p:messages id="messages" severity="error" showDetail="true" 
+                        autoUpdate="true"/>  
+         <div style="text-align: center">
+            <div style="text-align: center">
+                <h1>Envio Personalizado de Email</h1>
+                <h3>Aplicacion Web con <span style="color: red"> JAVA EE </span> 
+                    Utilizando la API <span style="color: red"> JavaMail </span> 
+                    implementado el Framework 
+                    <span style="color: red">JSF</span></h3>
+                <h3>
+                    <span style="color: red">Facelets</span> 
+                    es el lenguaje utilizado</h3>
+           </div>
+              <p:panel header="Formulario de Email">	                
+                <h:panelGrid columns="3" >
+                <p:outputLabel value="DE: "/>
+                <p:inputText value="#{correoController.from}" 
+                                  validator="#{correoController.validateEmail}"
+                                label="from" 
+                                id="from"
+                                size="50">
+                     </p:inputText>
+                     <p:message for="from" style="color:red"/> 
+                <p:outputLabel value="PARA: "/>
+                <p:inputText value="#{correoController.to}" required="true"
+                                  validator="#{correoController.validateEmail}"
+                                   label="to" 
+                                   id="to"
+                                  size="50">   
+                     </p:inputText>
+                     <p:message for="to" style="color:red"/> 
+                <p:outputLabel value="ASUNTO: "/>
+                <p:inputText value="#{correoController.subject}"  
+                                     validatorMessage="Requiere el Asunto"
+                                     label="subject" 
+                                     id="subject"
+                                     size="50">                     
+                     </p:inputText>
+                     <p:message for="subject" style="color:red"/> 
+                <p:outputLabel value="SMTP: "/>
+                     <p:inputText id="smtp" 
+                                     validatorMessage="SMTP requiere una direccion IP"
+                                     value="#{correoController.smtp}"
+                                     size="50"> 
+                            <f:validateRequired for="smtp"/>
+                     </p:inputText>
+                     <p:message style="color:red" for="smtp"/>
+                <p:outputLabel value="USUARIO: "/>
+                <p:inputText id="usuario" value="#{correoController.username}"
+                                     size="50"> 
+                     </p:inputText>                  
+                     <p:message style="color:red" for="usuario"/>
+                <p:outputLabel value="PASSWORD: "/>
+                <p:password id="password" value="#{correoController.password}"
+                                    size="50">
+                     </p:password>
+                     <p:message style="color:red" for="password"/>
+                <p:outputLabel value="PUERTO: "/>
+                <p:inputText id="puerto" value="#{correoController.port}"
+                                     size="50" style="margin-rigth:50px"> 
+                     </p:inputText>                  
+                     <p:message style="color:red" for="puerto"/>
+                <p:outputLabel value="MENSAJE: "/>
+                     <p:inputTextarea id="descr" cols="50" rows="5"
+                                      value="#{correoController.body}">                     
+                     </p:inputTextarea>
+                     <p:message style="color:red" for="body"/>
+                     <p:commandButton action="#{correoController.submitEmail}" 
+                                        value="Enviar" id="submit"/>                    
+                    </h:panelGrid>                
+                </p:panel>
+            </div>
+        </h:form>
+    
+</html>

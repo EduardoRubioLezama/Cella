@@ -12,30 +12,26 @@
     <h:head>
         <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous"/>
         <!--<link rel="stylesheet" type="text/css" href="resources/css/SeleccionarMateriales.css"/>-->
-        <title>Facelets Template</title>
+        <title>#{verKit.nombreKit}</title>
     </h:head>
-    <ui:include src="header.xhtml"></ui:include>
+    <ui:include src="navBar.xhtml"></ui:include>
     
     
     <h:body>
-        
-        
+        <h3>#{verKit.nombreKit}</h3>    
            
-           
-            <div class="col-md-4">
+        <div class="col-md-4">
                 
-                <ui:repeat value="#{verKit.seleccionados}" var="item">
-                    <div class="card">
-                        <div class="card-body">
-                            <h5 class="card-title">#{item}</h5>
+            <ui:repeat value="#{verKit.seleccionados}" var="item">
+                <div class="card">
+                    <div class="card-body">
+                        <h5 class="card-title">#{item}</h5>
                               
-                        </div>
                     </div>
-                </ui:repeat>
-                
-                <h5>#{verKit.nombreKit}</h5>
-                
-            </div>   
+                </div>
+            </ui:repeat>
+                                               
+        </div>   
            
               
         

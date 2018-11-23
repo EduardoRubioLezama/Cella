@@ -1,4 +1,5 @@
-<!DOCTYPE html>
+<?xml version="1.0" encoding="UTF-8" ?> 
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"      
       xmlns:ui="http://xmlns.jcp.org/jsf/facelets" 
       xmlns:jsf="http://xmlns.jcp.org/jsf"
@@ -15,13 +16,19 @@
         <div class="col-xs-4"></div>
         <div class="card bg-light mb-2">
             <div class="card-header" align="center"> Agregar Material </div>
-            <h:form>
-                <p:selectOneMenu id="car" value="#{materialController.nombrematerial}" effect="fold" editable="true">
-                    <f:selectItem itemLabel="Nuevo +" itemValue="nuevo" />
-                    <f:selectItems value="#{materialController.materiales}" />
-                </p:selectOneMenu>
+            <h:form id="altaMaterial" enctype="multipart/form-data">
+                <div class="col-sm-4" align="right">
+                    <p:selectOneMenu id="car" value="#{materialController.nombrematerial}" effect="fold" editable="true">
+                        <f:selectItem itemLabel="Nuevo +" itemValue="nuevo" />
+                        <f:selectItems value="#{materialController.materiales}" />
+                    </p:selectOneMenu>
+                </div>
                 
-                <!--
+                <div class="col-sm-4" align="right">
+                    <p:fileUpload value="#{materialController.fotografia}" mode="simple" skinSimple="true"
+                                  fileUploadListener="#{materialController.fileUploadListener}" />
+                </div>
+                <!-- 
                 <div class="form-group row">
                     <label for="inputName3" class="col-sm-2 col-form-label" ></label>
                     <div class="col-sm-2">
@@ -31,7 +38,7 @@
                 <div class="form-group row ">
                     <label for="inputDescripcion" class="col-sm-2 col-form-label"></label>
                     <div class="col-sm-2">
-                        <p:inputText type="text" class="form-control" id="inputDescripcion" placeholder="Descripcion" required="true" value="#{materialController.descripcion}"/>
+                        <p:inputText type="text" class="form-control" id="inputDescripcion" placeholder="Descripcion" value="#{materialController.descripcion}"/>
                     </div>
                 </div>
                 -->

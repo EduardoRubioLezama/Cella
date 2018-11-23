@@ -125,7 +125,7 @@ public class KitController {
             ckm.setIdMaterial(material);
             ckmjpa.create(ckm);
         }
-        FacesContext.getCurrentInstance().getExternalContext().redirect("Prueba2.xhtml");
+        FacesContext.getCurrentInstance().getExternalContext().redirect("Prueba2.xhtml?kit="+kit.getNombrekit());
         return null;
     }
     
