@@ -14,9 +14,15 @@ import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import unam.mx.cella.modelo.EntityProvider;
 import unam.mx.cella.modelo.Categoria;
+<<<<<<< HEAD
 import unam.mx.cella.modelo.CategoriaJpaController;
 import unam.mx.cella.modelo.Subcategorias;
 import unam.mx.cella.modelo.SubcategoriasJpaController;
+=======
+import unam.mx.cella.modelo.controller.CategoriaJpaController;
+import unam.mx.cella.modelo.Subcategorias;
+import unam.mx.cella.modelo.controller.SubcategoriasJpaController;
+>>>>>>> 11c02a74516c4419684805ff421a552ecd4272f1
 
 /**
  *
@@ -107,4 +113,8 @@ public class CategoriaController {
     private EntityManager getEntityManager() {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
+<<<<<<< HEAD
 }
+=======
+}
+>>>>>>> 11c02a74516c4419684805ff421a552ecd4272f1
