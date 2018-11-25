@@ -20,8 +20,8 @@ import javax.persistence.EntityManagerFactory;
 import unam.mx.cella.modelo.EntityProvider;
 import unam.mx.cella.modelo.Material;
 import unam.mx.cella.modelo.Unidadmaterial;
-import unam.mx.cella.modelo.controller.MaterialJpaController;
-import unam.mx.cella.modelo.controller.UnidadmaterialJpaController;
+import unam.mx.cella.modelo.MaterialJpaController;
+import unam.mx.cella.modelo.UnidadmaterialJpaController;
 
 /**
  *
@@ -36,15 +36,16 @@ public class BusquedaController {
      */
     private final EntityManagerFactory emf;
     private Material material;
-    private List<Material> materiales;
-    private String nombrematerial;
+    private List<String> materiales;
+    private String busqueda;
+    private List<String> resultado;
     public BusquedaController() {
         emf = EntityProvider.provider();
         FacesContext.getCurrentInstance().getViewRoot().setLocale(
                 new Locale("es-Mx"));
         this.material = new Material();
         this.materiales = new ArrayList<>();
-        nombrematerial = "";
+        busqueda = "";
     } 
     
     public Material getMaterial(){
@@ -55,22 +56,37 @@ public class BusquedaController {
         this.material = material;
     }
     
-    public List<Material> getMateriales(){
+    public List<String> getMateriales(){
         return materiales;
     }
 
-    public String getNombrematerial(){
-        return nombrematerial;
+    public String getBusqueda(){
+        return busqueda;
     }
     
-    public void setNombrematerial(String nombrematerial){
-        this.nombrematerial = nombrematerial;
+    public void setBusqueda(String busqueda){
+        this.busqueda = busqueda;
     }
     
-    public List<Material> ResultBusqueda(){
+    public List<String> getResultado(){
+        return resultado;
+    }
+
+    public void setResultado(List<String> resultado){
+        this.resultado = resultado;
+    }
+    
+    public void loadResultBusqueda(){
         MaterialJpaController mjpa = new MaterialJpaController(emf);
-        List<Material> mt = mjpa.findMaterials(nombrematerial);
-        return mt;
+        materiales = mjpa.getNombresMaterial();
+        materiales.sort(String.CASE_INSENSITIVE_ORDER);
+        resultado = new ArrayList<>();
+        CharSequence busquedaChar = new StringBuffer(busqueda);
+        for (String s :materiales){
+            if(s.contains(busquedaChar)){
+                resultado.add(s);
+            }
+        }
     }
     
     private EntityManager getEntityManager() {
