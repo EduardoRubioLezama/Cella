@@ -1,0 +1,59 @@
+<?xml version='1.0' encoding='UTF-8' ?> 
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html  xmlns="http://www.w3.org/1999/xhtml"      
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets" 
+      xmlns:jsf="http://xmlns.jcp.org/jsf"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+    <h:head>
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous"/>
+        <link href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css"/>
+        <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/js/bootstrap.min.js"></script>
+        <script src="//code.jquery.com/jquery-1.11.1.min.js"></script>  
+        <title>Materiales </title>
+        
+    </h:head>
+    <ui:include src="navBarAlumno.xhtml"></ui:include>
+    <h:body style="margin-bottom: 100px;">
+
+        <div id="top" class="top">
+            <ui:insert name="top">#{inicioSesion.email}</ui:insert>
+        </div>
+       <!-- <h:form id="altaKit" enctype="multipart/form-data">-->
+       <section id="t-cards">
+           <div class="container">
+               <div class="row">
+                   <!--Se empieza el "talero" de las muestras de los materiales.
+                   Se muestra Categorias y Subcategorias-->
+                   <div class="col-sm-4 col-md-4">
+                       <div class="panel panel-default panel-card">
+                           <div class="panel-heading">
+                               <!--Se selecciona la imagen representativa de la categoria-->
+                               <img class="card-img-top" src="resources/images/categoria.jpg"></img>
+                               
+                           </div>
+                           <div class="panel-body text-center">
+                               <!--Se muestra el redireccionamiento de la pagina Materiales a Categoria-->
+                               <h5 class="panel-header"><a href="Categoria.xhtml"> Categorias</a></h5>
+                           </div>   
+                       </div>     
+                   </div>
+                   <div class="col-sm-4 col-md-4">
+                       <div class="panel panel-default panel-card">
+                           <div class="panel-heading">
+                               <!--Se selecciona la imagen representativa de la categoria-->
+                               <img class="card-img-top" src="resources/images/subcategoria.jpg"></img>    
+                           </div>
+                           <div class="panel-body text-center">
+                               <!--Se muestra el redireccionamiento de la pagina Materiales a Subategoria-->
+                               <h5 class="panel-header"><a href="Subcategoria.xhtml"> Subcategorias</a></h5>
+                           </div>
+                       </div>
+                   </div>
+               </div>
+           </div>    
+       </section>
+    </h:body>
+    <ui:include src="footer.xhtml"></ui:include>
+</html>
