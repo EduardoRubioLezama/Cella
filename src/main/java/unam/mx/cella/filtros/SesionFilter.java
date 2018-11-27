@@ -43,7 +43,7 @@ public class SesionFilter implements Filter {
         HttpSession session = (HttpSession) req.getSession(true);
         String pageRequest = req.getRequestURI().toString();
         if(session.getAttribute("nombreusuario") == null){
-            res.sendRedirect(req.getContextPath() + "../Inicio.xhtml");
+            res.sendRedirect(req.getContextPath() + "/Inicio.xhtml");
             return;
         }
         chain.doFilter(request, response);

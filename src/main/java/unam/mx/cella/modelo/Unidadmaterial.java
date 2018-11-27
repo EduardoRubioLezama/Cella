@@ -35,7 +35,10 @@ import javax.xml.bind.annotation.XmlTransient;
     @NamedQuery(name = "Unidadmaterial.findAll", query = "SELECT u FROM Unidadmaterial u")
     , @NamedQuery(name = "Unidadmaterial.findById", query = "SELECT u FROM Unidadmaterial u WHERE u.id = :id")
     , @NamedQuery(name = "Unidadmaterial.findByNombrematerial", query = "SELECT u FROM Unidadmaterial u WHERE u.nombrematerial = :nombrematerial")
-    , @NamedQuery(name = "Unidadmaterial.findByEstado", query = "SELECT u FROM Unidadmaterial u WHERE u.estado = :estado")})
+    , @NamedQuery(name = "Unidadmaterial.findByEstado", query = "SELECT u FROM Unidadmaterial u WHERE u.estado = :estado")
+    , @NamedQuery(name = "Unidadmaterial.findEstadoByNombre", query = "SELECT u.estado FROM Unidadmaterial u WHERE u.nombrematerial = ?1")
+})
+//select estado from cella.unidad_material where nombrematerial = 'jeringas';
 public class Unidadmaterial implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -156,5 +159,5 @@ public class Unidadmaterial implements Serializable {
     public String toString() {
         return "unam.mx.cella.modelo.Unidadmaterial[ id=" + id + " ]";
     }
-    
+
 }

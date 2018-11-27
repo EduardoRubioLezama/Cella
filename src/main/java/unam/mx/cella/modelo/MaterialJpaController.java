@@ -327,5 +327,19 @@ public class MaterialJpaController implements Serializable {
             materiales.add(a.getNombrematerial());
         }
         return materiales;        
-    }                         
+    }
+    
+    public boolean findUnidadmaterialByNombre(String nombre) {
+        EntityManager em = getEntityManager();
+        Query q = em.createNamedQuery("Material.findByNombrematerial")                
+                .setParameter("nombrematerial",nombre);
+        return !q.getResultList().isEmpty();
+    }
+    
+    public Unidadmaterial findUnidadmaterialEstadoByNombre(String nombre) {
+        EntityManager em = getEntityManager();
+        Query q = em.createNamedQuery("Unidadmaterial.findEstadoByNombre")                
+                .setParameter(1,nombre);
+        return (Unidadmaterial) q.getResultList();
+    }
 }

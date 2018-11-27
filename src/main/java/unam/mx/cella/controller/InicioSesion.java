@@ -126,15 +126,14 @@ public class InicioSesion {
                     new FacesMessage(FacesMessage.SEVERITY_INFO,
                             "Felicidades, el alumno si existe en ele sistema", ""));
             return "secured/Principal?faces-redirect=true";
-        }
-        System.out.println("no entre al metodo");
+        }        
         return "Registrar?faces-redirect=true";
     }
 
     public String logout() {
         FacesContext context = getCurrentInstance();
         context.getExternalContext().invalidateSession();
-        return "/../Inicio?faces-redirect=true";
+        return "/faces/Inicio?faces-redirect=true";
     }
 
     /**

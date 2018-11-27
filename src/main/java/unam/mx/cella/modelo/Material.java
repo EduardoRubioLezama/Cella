@@ -33,7 +33,9 @@ import javax.xml.bind.annotation.XmlTransient;
     @NamedQuery(name = "Material.findAll", query = "SELECT m FROM Material m")
     , @NamedQuery(name = "Material.findById", query = "SELECT m FROM Material m WHERE m.id = :id")
     , @NamedQuery(name = "Material.findByNombrematerial", query = "SELECT m FROM Material m WHERE m.nombrematerial = :nombrematerial")
-    , @NamedQuery(name = "Material.findByDescripcion", query = "SELECT m FROM Material m WHERE m.descripcion = :descripcion")})
+    , @NamedQuery(name = "Material.findByDescripcion", query = "SELECT m FROM Material m WHERE m.descripcion = :descripcion")
+    , @NamedQuery(name = "Material.findEstadoByNombre", query = "SELECT u.estado FROM Unidadmaterial u WHERE u.nombrematerial = ?1")
+})
 
 public class Material implements Serializable {
 
@@ -155,5 +157,5 @@ public class Material implements Serializable {
     public String toString() {
         return "unam.mx.cella.modelo.Material[ id=" + id + " ]";
     }
-    
+
 }
