@@ -107,7 +107,8 @@ public class InicioSesion {
             FacesContext.getCurrentInstance().addMessage(null,
                     new FacesMessage(FacesMessage.SEVERITY_INFO,
                             "Felicidades, el alumno si existe en ele sistema", ""));
-            return "secured/Principal?faces-redirect=true";
+            return "Perfil?faces-redirect=true";
+//            return "secured/Principal?faces-redirect=true";
         } else if (loggedAdmin){
             Administrador administrador = adjc.findAdministrador(email);
             FacesContext context = getCurrentInstance();
@@ -116,7 +117,8 @@ public class InicioSesion {
             FacesContext.getCurrentInstance().addMessage(null,
                     new FacesMessage(FacesMessage.SEVERITY_INFO,
                             "Felicidades, el alumno si existe en ele sistema", ""));
-            return "secured/Principal?faces-redirect=true";
+            return "Principal?faces-redirect=true";
+//            return "secured/Principal?faces-redirect=true";
         } else if (loggedProfesor){
             Profesor profesor = pjc.findCorreo(email);
             FacesContext context = getCurrentInstance();

@@ -8,7 +8,7 @@ import unam.mx.cella.modelo.ContenerKitMaterial;
 import unam.mx.cella.modelo.PertenecerMaterialCategoria;
 import unam.mx.cella.modelo.Unidadmaterial;
 
-@Generated(value="EclipseLink-2.5.2.v20140319-rNA", date="2018-11-20T19:50:26")
+@Generated(value="EclipseLink-2.5.2.v20140319-rNA", date="2018-11-28T15:11:55")
 @StaticMetamodel(Material.class)
 public class Material_ { 
 

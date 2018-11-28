@@ -5,7 +5,7 @@ import javax.persistence.metamodel.SingularAttribute;
 import javax.persistence.metamodel.StaticMetamodel;
 import unam.mx.cella.modelo.Material;
 
-@Generated(value="EclipseLink-2.5.2.v20140319-rNA", date="2018-11-20T19:50:26")
+@Generated(value="EclipseLink-2.5.2.v20140319-rNA", date="2018-11-28T15:11:55")
 @StaticMetamodel(ContenerKitMaterial.class)
 public class ContenerKitMaterial_ { 
 

@@ -38,6 +38,6 @@
     
     <!-- pagina de inicio-->
     <welcome-file-list>
-        <welcome-file>/faces/Inicio.xhtml</welcome-file>
+        <welcome-file>Inicio.xhtml</welcome-file>
     </welcome-file-list>
 </web-app>
