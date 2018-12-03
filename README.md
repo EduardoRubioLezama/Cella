@@ -6,7 +6,7 @@ de ciencias en la UNAM.
 
 
 ## Integrantes
-Eduardo Lezama Rubio
+Eduardo Rubio Lezama 
 Jaime
 José Carlos Buenrostro Rueda
 Rossana Palma
@@ -31,12 +31,12 @@ Tener propiamente instalado y configurado los siguientes programas
 Hay dos opciones para obtener el proyecto:
 
 * (Clonar el repositorio de la siguiente liga)[https://github.com/EduardoRubioLezama/Cella.git]
-   Abrir netbeans, ir a la pestaÃ±a File y seguir las opciones 
+   Abrir netbeans, ir a la pestaña File y seguir las opciones 
 	File -> Open Project 
    Navegar hasta la carpeta en donde se haya clonado el repositorio.
 
 * (Descargar el comprimido de la siguiente liga)[https://github.com/EduardoRubioLezama/Cella.git]
-   Abrir netbeans, ir a la pestaÃ±a File y seguir las opciones 
+   Abrir netbeans, ir a la pestaña File y seguir las opciones 
 	File -> Open Project 
    Navegar hasta la carpeta en donde se haya descrompimido el archivo .zip que descargaste.
 
