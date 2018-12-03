@@ -11,13 +11,13 @@ import javax.faces.bean.ManagedBean;
 import javax.faces.bean.RequestScoped;
 import javax.faces.context.FacesContext;
 import javax.persistence.EntityManagerFactory;
-import unam.mx.cella.controller.exceptions.IllegalOrphanException;
-import unam.mx.cella.controller.exceptions.NonexistentEntityException;
+import unam.mx.cella.modelo.controller.exceptions.IllegalOrphanException;
+import unam.mx.cella.modelo.controller.exceptions.NonexistentEntityException;
 import unam.mx.cella.modelo.EntityProvider;
 import unam.mx.cella.modelo.Material;
 import unam.mx.cella.modelo.Unidadmaterial;
-import unam.mx.cella.modelo.controller.MaterialJpaController;
-import unam.mx.cella.modelo.controller.UnidadmaterialJpaController;
+import unam.mx.cella.modelo.MaterialJpaController;
+import unam.mx.cella.modelo.UnidadmaterialJpaController;
 
 /**
  *
@@ -58,7 +58,7 @@ public class EliminarmaterialController {
         this.nombrematerial = nombrematerial;
     }
    
-    public String removeUnidadMaterial() throws IllegalOrphanException, NonexistentEntityException{
+    public String removeUnidadMaterial() throws IllegalOrphanException, NonexistentEntityException, unam.mx.cella.modelo.exceptions.IllegalOrphanException, unam.mx.cella.modelo.exceptions.NonexistentEntityException{
         MaterialJpaController mjpa = new MaterialJpaController(emf);
         UnidadmaterialJpaController umjpa = new UnidadmaterialJpaController(emf);
         Unidadmaterial umt = umjpa.findMaterial(nombrematerial);

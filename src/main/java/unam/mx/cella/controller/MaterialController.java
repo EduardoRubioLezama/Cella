@@ -16,8 +16,8 @@ import javax.persistence.EntityManagerFactory;
 import unam.mx.cella.modelo.EntityProvider;
 import unam.mx.cella.modelo.Material;
 import unam.mx.cella.modelo.Unidadmaterial;
-import unam.mx.cella.modelo.controller.MaterialJpaController;
-import unam.mx.cella.modelo.controller.UnidadmaterialJpaController;
+import unam.mx.cella.modelo.MaterialJpaController;
+import unam.mx.cella.modelo.UnidadmaterialJpaController;
 
 /**
  *

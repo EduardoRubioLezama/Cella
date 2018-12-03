@@ -1,8 +1,0 @@
-#surefire
-#Sun Nov 11 15:39:13 CST 2018
-maven.ext.class.path=C\:\\Program Files (x86)\\NetBeans 8.2\\java\\maven-nblib\\netbeans-eventspy.jar
-user.dir=C\:\\Users\\rossa\\Documents\\2019-1\\IS\\Backup\\Cella
-localRepository=C\:\\Users\\rossa\\.m2\\repository
-netbeans.deploy=true
-netbeans.deploy.clientUrlPart=/faces/inicioSesion.xhtml
-basedir=C\:\\Users\\rossa\\Documents\\2019-1\\IS\\Backup\\Cella

@@ -136,4 +136,28 @@ public class AlumnoJpaController implements Serializable {
         }
     }
     
+    public Alumno findAlumno(String usuario) {
+        EntityManager em = getEntityManager();
+        Query q;
+        q = em.createNamedQuery("Alumno.findByNombreusuario")
+                .setParameter("nombreusuario",usuario);
+                
+        if (q.getResultList().isEmpty()) {
+            return null;
+        }
+        return (Alumno) q.getSingleResult();
+    }
+    
+    public Alumno findCorreo(String correo) {
+        EntityManager em = getEntityManager();
+        Query q;
+        q = em.createNamedQuery("Alumno.findByCorreo")
+                .setParameter("correo",correo);
+                
+        if (q.getResultList().isEmpty()) {
+            return null;
+        }
+        return (Alumno) q.getSingleResult();
+    }
+    
 }

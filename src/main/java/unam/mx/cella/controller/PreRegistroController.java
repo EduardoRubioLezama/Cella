@@ -13,8 +13,7 @@ import javax.faces.application.FacesMessage;
 import javax.persistence.EntityManagerFactory;
 import unam.mx.cella.modelo.Profesor;
 import unam.mx.cella.modelo.EntityProvider;
-//import unam.mx.cella.modelo.AlumnoJpaController;
-
+import unam.mx.cella.modelo.ProfesorJpaController;
 /**
  *
  * @author eduar
@@ -27,6 +26,14 @@ public class PreRegistroController {
     private Profesor profesor;
     private String confirmacion;
     
+    
+    public String getConfirmacion(){
+        return confirmacion;
+    }
+    
+    public void setConfirmacion(String confirmacion){
+        this.confirmacion = confirmacion;
+    }
     
     public Profesor getProfesor() {
         return profesor;
@@ -41,7 +48,7 @@ public class PreRegistroController {
      * Creates a new instance of PreRegistroController
      */
     public PreRegistroController() {
-         emf = EntityProvider.provider();
+        emf = EntityProvider.provider();
         System.out.println("creado");
         FacesContext.getCurrentInstance().getViewRoot().setLocale(
                 new Locale("es-Mx"));
@@ -50,4 +57,65 @@ public class PreRegistroController {
     
     }
     
+     public boolean verificaUsuario(String userName){
+        
+        ProfesorJpaController ajpa = new ProfesorJpaController(emf);
+        return ajpa.findProfesor(userName) == null;
+    }
+    
+     public boolean verificaCorreo(String correo){
+        
+        ProfesorJpaController ajpa = new ProfesorJpaController(emf);
+        return ajpa.findCorreo(correo) == null;
+    }
+    
+    public String addUser() {
+         
+        if(!(verificaUsuario(profesor.getNombreusuario()))){
+            FacesContext.getCurrentInstance().addMessage(null
+            , new FacesMessage(FacesMessage.SEVERITY_ERROR, 
+                    "Fallo de registro: Nombre de usuario existente, elige otro", ""));
+        } 
+        
+        else if(!(verificaCorreo(profesor.getCorreo()))){
+            FacesContext.getCurrentInstance().addMessage(null
+            , new FacesMessage(FacesMessage.SEVERITY_ERROR, 
+                    "Fallo de registro: correo ya registrado en el sistema", ""));
+        }  
+        else if (!profesor.getContrasena().equals(confirmacion)) {
+            FacesContext.getCurrentInstance().addMessage(null
+            , new FacesMessage(FacesMessage.SEVERITY_ERROR, 
+                    "Fallo de registro: Las contraseñas deben coincidir", ""));
+        } else {
+           // LoginJpaController ljpa = new LoginJpaController(emf);
+            ProfesorJpaController pjpa = new ProfesorJpaController(emf);
+
+           // Login login = new Login();
+            //login.setUsuario(usuario);
+            //login.setPassword(contraseña);
+            //ljpa.create(login);
+            //login = ljpa.findLoginByUsuario(usuario);
+
+            Profesor prof = new Profesor();
+            //alum.setLoginId(login.getId());
+           
+            prof.setNombre(profesor.getNombre());
+            prof.setApellidop(profesor.getApellidop());
+            prof.setApellidom(profesor.getApellidom());
+            prof.setCorreo(profesor.getCorreo());
+            prof.setNombreusuario(profesor.getNombreusuario());
+            prof.setContrasena(profesor.getContrasena());
+            prof.setEdocuenta(true);
+            prof.setNotrabajador(profesor.getNotrabajador());
+            prof.setRfc(profesor.getRfc());
+            
+            pjpa.create(prof);
+
+            FacesContext.getCurrentInstance().addMessage(null,
+                                                         new FacesMessage (FacesMessage.SEVERITY_INFO,
+                                                                          "Felicidades, el registro se ha realizado correctamente", ""));
+        } 
+        return null;
+    }
+
 }
