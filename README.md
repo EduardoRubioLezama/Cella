@@ -52,7 +52,7 @@ persistence.xml
 abrélo y si se muestra la pestaña de Design dirígete a la pestaña de Source
 ahora busca la partes siguientes:
 
-```
+```xml
       <property name="javax.persistence.jdbc.user" value="tu-usuario"/>
       <property name="javax.persistence.jdbc.passwrd" value="tu-contraseña"/>
 ```
@@ -75,5 +75,5 @@ mi-primer-aplicacion-web -> Project Files -> pom.xml
 click derecho Run Maven -> tomcat7
 Esto hará que un servidor apache tomcat versión 7 corra en tu equipo.
 Inmediatamente dirígete a tu navegador web y escribe para que puedas comenzar a navegar
-localhost:8084/mi-primer-aplicacion-web/faces/Inicio.xhtml
+localhost:8080/mi-primer-aplicacion-web/faces/Inicio.xhtml
 
