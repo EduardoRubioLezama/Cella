@@ -1,50 +1,80 @@
 # Cella
 
-Cella es un sistema de prÃ©stamos de material para prÃ¡cticas de campo para los alumnos de la carrera de BiologÃ­a de la facultad 
+Cella es un sistema de préstamos de material para prácticas de campo para los 
+alumnos de la carrera de Biología de la facultad 
 de ciencias en la UNAM.
 
-## Getting Started
+
+## Integrantes
+Eduardo Lezama Rubio
+Jaime
+José Carlos Buenrostro Rueda
+Rossana Palma
+Yessica Janeth Pablo
+
 ## Comenzando
 
-These instructions will get you a copy of the project up and running on your local machine for development and testing purposes. See deployment for notes on how to deploy the project on a live system.
+El siguiente procedimiento creará una copia del proyecto Cella en tu computadora 
+personal para con el propósito de hace pruebas sobre el mismo.
 
 ### Prerequisitos
 
-JDK 8
-NetBeans (completo o en su versiÃ³n JAVA EE)
-Postgresql
-Git 
+Todas las siguientes indicaciones están hechas en el sistema operativo Windows 10.
+Tener propiamente instalado y configurado los siguientes programas
+
+1 JDK 8
+2 NetBeans (completo o en su versión JAVA EE) 8.2
+3 Postgresql 10.6
+
+### Cargando el proyecto
+
+Hay dos opciones para obtener el proyecto:
+
+* (Clonar el repositorio de la siguiente liga)[https://github.com/EduardoRubioLezama/Cella.git]
+   Abrir netbeans, ir a la pestaÃ±a File y seguir las opciones 
+	File -> Open Project 
+   Navegar hasta la carpeta en donde se haya clonado el repositorio.
+
+* (Descargar el comprimido de la siguiente liga)[https://github.com/EduardoRubioLezama/Cella.git]
+   Abrir netbeans, ir a la pestaÃ±a File y seguir las opciones 
+	File -> Open Project 
+   Navegar hasta la carpeta en donde se haya descrompimido el archivo .zip que descargaste.
+
+Después de tener el proyecto en tu netbeans deberás de navegar sobre el proyecto
+de la siguiente manera:
+
+mi-primer-aplicacion-web -> Other Sources -> src/main/resurces -> sql 
+
+y encontrarás el archivo crear_base_cella.sql abrélo y copia el contenido en 
+tu pgAdmin y ejecuta esto creará la base de datos de Cella. Ahora ubícate nuevamente
+en el netbeans y en la carpeta src/main/resources/META-INF encontrarás el archivo
+persistence.xml 
+abrélo y si se muestra la pestaña de Design dirígete a la pestaña de Source
+ahora busca la partes siguientes:
 
 ```
-Give examples
+      <property name="javax.persistence.jdbc.user" value="tu-usuario"/>
+      <property name="javax.persistence.jdbc.passwrd" value="tu-contraseña"/>
 ```
+en donde deberás de poner los datos respectivos de tu base de datos, si por ejemplo 
+usas el usuario: postgres es lo que deberás de poner en "tu-usuario" 
+con contraseña: x eso es lo que deberás de poner en "tu-contraseña" 
 
-### Installing
+## Descargando dependencias
 
-A step by step series of examples that tell you how to get a development env running
+Ubícate en tu netbeans y elige el proyecto mi-primer-aplicacion-web
+click derecho y picar: Clean and Build esto descargará todas las dependencias
+que necesita el proyecto para correr y debemos de esperar a que termine de descargar
+las dependencias.
 
-Say what the step will be
+### Corriendo el proyecto
 
-```
-Give the example
-```
-
-And repeat
-
-```
-until finished
-```
-
-End with an example of getting some data out of the system or using it for a little demo
-
-## Running the tests
-
-Explain how to run the automated tests for this system
-
-### Break down into end to end tests
-
-Explain what these tests test and why
-
+Una vez descargadas todas las dependencias navegamos en el proyecto 
+de la siguiente manera
+mi-primer-aplicacion-web -> Project Files -> pom.xml 
+click derecho Run Maven -> tomcat7
+Esto hará que un servidor apache tomcat versión 7 corra en tu equipo.
+Inmediatamente dirígete a tu navegador web y 
 ```
 Give an example
 ```

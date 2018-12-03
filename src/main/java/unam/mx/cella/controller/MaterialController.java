@@ -116,7 +116,6 @@ public class MaterialController {
         mt = mjpa.findMaterial(nombrematerial);
         umt.setNombrematerial(nombrematerial);
         umt.setEstado(estado.toLowerCase());
-        
         umt.setIdMaterial(mt);
         umjpa.create(umt);
     
