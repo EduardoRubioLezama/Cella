@@ -8,7 +8,7 @@ import unam.mx.cella.modelo.Material;
 import unam.mx.cella.modelo.Solicitarprestamoalumno;
 import unam.mx.cella.modelo.Solicitarprestamoprofesor;
 
-@Generated(value="EclipseLink-2.5.2.v20140319-rNA", date="2018-11-28T15:11:55")
+@Generated(value="EclipseLink-2.5.2.v20140319-rNA", date="2018-12-03T00:57:26")
 @StaticMetamodel(Unidadmaterial.class)
 public class Unidadmaterial_ { 
 

@@ -6,7 +6,7 @@ import javax.persistence.metamodel.StaticMetamodel;
 import unam.mx.cella.modelo.Categoria;
 import unam.mx.cella.modelo.Material;
 
-@Generated(value="EclipseLink-2.5.2.v20140319-rNA", date="2018-11-28T15:11:55")
+@Generated(value="EclipseLink-2.5.2.v20140319-rNA", date="2018-12-03T00:57:26")
 @StaticMetamodel(PertenecerMaterialCategoria.class)
 public class PertenecerMaterialCategoria_ { 
 
