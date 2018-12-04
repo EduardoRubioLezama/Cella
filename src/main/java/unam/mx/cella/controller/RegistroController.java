@@ -83,7 +83,7 @@ public class RegistroController {
     public boolean verificaUsuario(String userName){
         
         AlumnoJpaController ajpa = new AlumnoJpaController(emf);
-        return ajpa.findAlumno(userName) == null;
+        return ajpa.findAlumnoNU(userName) == null;
     }
     
     public boolean verificaCorreo(String correo){
@@ -133,19 +133,20 @@ public class RegistroController {
             alum.setCorreo(alumno.getCorreo());
             alum.setNombreusuario(alumno.getNombreusuario());
             alum.setContrasena(alumno.getContrasena());
-            alum.setEdocuenta(true);
+            alum.setEdocuenta("inactiva");
 
-            //pjpa.create(alum);
-            CorreoController cc = new CorreoController();
-            cc.setTo(alumno.getCorreo());
+            pjpa.create(alum);
+            
+            //CorreoController cc = new CorreoController();
+            //cc.setTo(alumno.getCorreo());
             //cc.setFrom(alumno.getCorreo());
             //cc.setUsername(alumno.getCorreo());
             
-            String resultado = cc.submitEmail();
-            
+            //String resultado = cc.submitEmail();
+            /*
             FacesContext.getCurrentInstance().addMessage(null,
                     new FacesMessage(FacesMessage.SEVERITY_INFO,
-                                      "Resultado del email:" + resultado , ""));
+                                      "Resultado del email:" + resultado , ""));*/
         }
         //FacesContext.getCurrentInstance().getExternalContext().redirect(".xhtml");
         return null;

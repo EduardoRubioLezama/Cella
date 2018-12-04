@@ -73,7 +73,7 @@ public class Profesor implements Serializable {
     private byte[] foto;
     @Basic(optional = false)
     @Column(name = "edocuenta")
-    private boolean edocuenta;
+    private String edocuenta;
     @Basic(optional = false)
     @Column(name = "rfc")
     private String rfc;
@@ -90,7 +90,7 @@ public class Profesor implements Serializable {
         this.id = id;
     }
 
-    public Profesor(Integer id, String nombreusuario, String correo, String contrasena, String nombre, String apellidop, String apellidom, boolean edocuenta, String rfc, String notrabajador) {
+    public Profesor(Integer id, String nombreusuario, String correo, String contrasena, String nombre, String apellidop, String apellidom, String edocuenta, String rfc, String notrabajador) {
         this.id = id;
         this.nombreusuario = nombreusuario;
         this.correo = correo;
@@ -167,11 +167,11 @@ public class Profesor implements Serializable {
         this.foto = foto;
     }
 
-    public boolean getEdocuenta() {
+    public String getEdocuenta() {
         return edocuenta;
     }
 
-    public void setEdocuenta(boolean edocuenta) {
+    public void setEdocuenta(String edocuenta) {
         this.edocuenta = edocuenta;
     }
 
