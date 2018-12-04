@@ -22,9 +22,9 @@ personal para con el propósito de hace pruebas sobre el mismo.
 Todas las siguientes indicaciones están hechas en el sistema operativo Windows 10.
 Tener propiamente instalado y configurado los siguientes programas
 
-1 JDK 8
-2 NetBeans (completo o en su versión JAVA EE) 8.2
-3 Postgresql 10.6
+1. JDK 8
+2. NetBeans (completo o en su versión JAVA EE) 8.2
+3. Postgresql 10.6
 
 ### Cargando el proyecto
 
@@ -46,7 +46,18 @@ de la siguiente manera:
 mi-primer-aplicacion-web -> Other Sources -> src/main/resurces -> sql 
 
 y encontrarás el archivo crear_base_cella.sql abrélo y copia el contenido en 
-tu pgAdmin y ejecuta esto creará la base de datos de Cella. Ahora ubícate nuevamente
+tu pgAdmin y ejecuta esto creará la base de datos de Cella. 
+De obtener un eeror como este 
+```
+ERROR:  CREATE DATABASE no puede ser ejecutado dentro de un bloque de transacción
+********** Error **********
+
+ERROR: CREATE DATABASE no puede ser ejecutado dentro de un bloque de transacción
+SQL state: 25001
+```
+Deberás de ejecutar la línea en la que se crea la base de datos cella y después 
+ejecutar el resto del script.
+Ahora ubícate nuevamente
 en el netbeans y en la carpeta src/main/resources/META-INF encontrarás el archivo
 persistence.xml 
 abrélo y si se muestra la pestaña de Design dirígete a la pestaña de Source
