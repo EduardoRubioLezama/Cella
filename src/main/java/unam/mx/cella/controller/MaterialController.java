@@ -6,6 +6,7 @@ package unam.mx.cella.controller;
  * and open the template in the editor.
  */
 
+import java.util.List;
 import java.util.Locale;
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
@@ -13,11 +14,14 @@ import javax.faces.bean.RequestScoped;
 import javax.faces.context.FacesContext;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
+import org.primefaces.event.FileUploadEvent;
+import org.primefaces.model.UploadedFile;
 import unam.mx.cella.modelo.EntityProvider;
 import unam.mx.cella.modelo.Material;
 import unam.mx.cella.modelo.Unidadmaterial;
 import unam.mx.cella.modelo.MaterialJpaController;
 import unam.mx.cella.modelo.UnidadmaterialJpaController;
+import unam.mx.cella.modelo.exceptions.NonexistentEntityException;
 
 /**
  *
@@ -33,13 +37,25 @@ public class MaterialController {
     
     private final EntityManagerFactory emf;
     private Material material;
+    private List<String> materiales;
     private Unidadmaterial unidadmaterial;
     private String nombrematerial;
     private String descripcion;
     private String estado;
+    private MaterialJpaController mjpa;
+    private UploadedFile fotografia;
+
+    public UploadedFile getFotografia() {
+        return fotografia;
+    }
+
+    public void setFotografia(UploadedFile fotografia) {
+        this.fotografia = fotografia;
+    }
+    
     public MaterialController() {
         emf = EntityProvider.provider();
-        System.out.println("creado");
+        mjpa = new MaterialJpaController(emf);
         FacesContext.getCurrentInstance().getViewRoot().setLocale(
                 new Locale("es-Mx"));
         this.material = new Material();
@@ -47,7 +63,7 @@ public class MaterialController {
         nombrematerial = "";
         descripcion = "";
         estado = "";
-        
+        materiales = mjpa.getNombresMaterial();
     }
     
     public Material getMaterial(){
@@ -57,6 +73,14 @@ public class MaterialController {
     public void setMaterial(Material material){
         this.material = material;
     }
+
+     public List<String> getMateriales() {
+        return materiales;
+    }
+
+    public void setMateriales(List<String> materiales) {
+        this.materiales = materiales;
+    }
     
     public Unidadmaterial getUnidadMaterial(){
         return unidadmaterial;
@@ -64,6 +88,10 @@ public class MaterialController {
     
     public void setUnidadMatrial(Unidadmaterial unidadmaterial){
         this.unidadmaterial = unidadmaterial;
+    }
+    
+    public void fileUploadListener(FileUploadEvent e) {
+        this.fotografia = e.getFile();
     }
     
     public String getNombrematerial(){
@@ -99,19 +127,25 @@ public class MaterialController {
     
     }
     
-    public String addMaterial(){
+    public String addMaterial() throws NonexistentEntityException, Exception{
                        
-        MaterialJpaController mjpa = new MaterialJpaController(emf);
         UnidadmaterialJpaController umjpa = new UnidadmaterialJpaController(emf);
         Material mt = new Material();
         Unidadmaterial umt = new Unidadmaterial();
-        
-        if(mjpa.findMaterial(nombrematerial) == null){
+        material = mjpa.findMaterial(nombrematerial);
+        if(material == null){
             mt.setNombrematerial(nombrematerial);
             mt.setDescripcion(descripcion);
+            if(fotografia != null){
+                mt.setFoto(fotografia.getContents());
+            }
+            
             mjpa.create(mt);
         }
-        
+        else if(material != null){
+            material.setFoto(fotografia.getContents());
+            mjpa.edit(material);
+        }
         mt = mjpa.findMaterial(nombrematerial);
         umt.setNombrematerial(nombrematerial);
         umt.setEstado(estado.toLowerCase());

@@ -84,26 +84,19 @@ public class CategoriaController {
 
     public String addCategoria() {
        
-            CategoriaJpaController cjc = new CategoriaJpaController(emf);
-            Categoria categ = new Categoria();
-            SubcategoriasJpaController sjc = new SubcategoriasJpaController(emf);
-            Subcategorias subcateg = new Subcategorias();
+        CategoriaJpaController cjpa = new CategoriaJpaController(emf);
+        categoria = new Categoria();
         
-            if(cjc.findCategoria(Integer.SIZE) == null){
-                categ.setNombrecategoria(categoria.getNombrecategoria());
-                categ.setDescripcion(categoria.getDescripcion());
-                cjc.create(categ);
-            }
-            categ = cjc.findCategoria(Integer.SIZE);
-            //subcateg.setNombrecategoria(subcategoria.getNombrecategoria());
-            //subcateg.setNombresubcategoria(subcategoria.getNombresubcategoria());
-            subcateg.setIdCategoria(categ);
-            //sjc.create(subcateg);
-
-            FacesContext.getCurrentInstance().addMessage(null,
-                                                         new FacesMessage(FacesMessage.SEVERITY_INFO,
-                                                                          "El registro se ha realizado correctamente", ""));
-         
+        if(cjpa.findCategoria(nombrecategoria) == null){
+            categoria.setNombrecategoria(nombrecategoria);
+            categoria.setDescripcion(descripcion);
+            cjpa.create(categoria);
+        }
+        
+    
+        FacesContext.getCurrentInstance().addMessage(null,
+                                            new FacesMessage(FacesMessage.SEVERITY_INFO,
+                                               "Se ha agregado una unidad del tipo: " + categoria + " con el id " + categoria.getId() , ""));
         return null;
     }
     private EntityManager getEntityManager() {

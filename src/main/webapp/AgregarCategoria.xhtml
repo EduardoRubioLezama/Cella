@@ -5,15 +5,39 @@
       xmlns:h="http://xmlns.jcp.org/jsf/html"
       xmlns:p="http://primefaces.org/ui">
   <head>
-    <title>Template</title>
-    <meta charset="UTF-8"/>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-    <link rel="stylesheet" type="text/css" href="css/styles.css"/>
-    <link rel="stylesheet" type="text/css" href="css/estilos.css"/>
+    <title>Agregar Categorias</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous"/>
   </head>
   <ui:include src="header.xhtml"></ui:include>
-  <ui:include src="navBar.xhtml"></ui:include>
   <h:body>
+      
+        <!-- Version mejorada -->
+    <div class="container mt-4" align="center">    
+    <div class="col-xs-4"></div>
+        <div class="card bg-light mb-2">
+            <div class="card-header" align="center"> Agregar Categoria </div>
+                <h:form>
+                    <div class="form-group row">
+                        <label for="inputName3" class="col-sm-2 col-form-label" >Nombre de categoria: <span class="warning">*(Obligatorio)</span></label>
+                        <div class="col-sm-2">
+                            <p:inputText type="text" class="form-control" id="inputName3" placeholder="[A-Za-z\s]+" required="true" value="#{categoriaController.nombrecategoria}"/>
+                        </div>   
+                    </div>
+                    <div class="form-group row">
+                        <label for="inputDescripcion" class="col-sm-2 col-form-label">Descripcion categoria: </label>
+                        <div class="col-sm-2">
+                            <p:inputText type="text" class="form-control" id="inputDescripcion" placeholder="[A-Za-z\s]+" required="false" value="#{categoriaController.descripcion}"/>
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <div class="col-sm-3" align="center">
+                            <button type="submit" class="btn btn-primary btn-lg" jsf:action="#{categoriaController.addCategoria}">Agregar</button>
+                        </div>
+                    </div>
+                </h:form>
+            </div>
+    </div>
+<!-- Version original 
     <fieldset>
       <legend>Agregar Categoria</legend>
       <form>
@@ -23,7 +47,7 @@
 	  </label>
 	  <input type="text" id="nombrepatalla" name="ip-pantalla"
 		 pattern="[A-Za-z\s]+"
-		 maxlength="5" minlength="2" value="Aa" required=""/>
+		 maxlength="20" minlength="5" value="Aa" required=""/>
 	  <span></span>
 	  <div>
 	    <label for="display-name"> Cantidad de Artículos:
@@ -43,7 +67,7 @@
       </form>
 
     </fieldset>
-    <footer>Algunos derechos de autor</footer>
+    <footer>Algunos derechos de autor</footer> -->
   </h:body>
   <ui:include src="footer.xhtml"></ui:include>
 </html>

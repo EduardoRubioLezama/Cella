@@ -12,6 +12,8 @@ import javax.faces.bean.RequestScoped;
 import javax.faces.context.FacesContext;
 import javax.faces.application.FacesMessage;
 import javax.persistence.EntityManagerFactory;
+import unam.mx.cella.modelo.Categoria;
+import unam.mx.cella.modelo.CategoriaJpaController;
 import unam.mx.cella.modelo.EntityProvider;
 import unam.mx.cella.modelo.Subcategorias;
 import unam.mx.cella.modelo.SubcategoriasJpaController;
@@ -25,7 +27,10 @@ import unam.mx.cella.modelo.SubcategoriasJpaController;
 public class SubcategoriaController {
 
     private final EntityManagerFactory emf;
-    private Subcategorias subcategoria;
+    private Subcategorias subcategoria; 
+    private Categoria categoria;
+    private String nombrecategoria;
+    private String nombresubcategoria;
  
     
     /**
@@ -37,6 +42,9 @@ public class SubcategoriaController {
         FacesContext.getCurrentInstance().getViewRoot().setLocale(
                 new Locale("es-Mx"));
         this.subcategoria = new Subcategorias();
+        this.categoria = new Categoria();
+        this.nombresubcategoria = "";
+        this.nombrecategoria = "";
         
     }
     public Subcategorias getSubcategoria(){
@@ -44,18 +52,43 @@ public class SubcategoriaController {
     }
     
     public void setSubcategoria(Subcategorias nueva){
-        subcategoria = nueva;
+        this.subcategoria = nueva;
     }
 
+    public Categoria getCategoria(){
+        return categoria;
+    }
+    
+    public void setCategoria(Categoria categoria){
+        this.categoria = categoria;
+    }
+    
+    public String getNombresubcategoria(){
+        return nombresubcategoria;
+    }
+    
+    public void setNombresubcategoria(String nombresubcategoria){
+        this.nombresubcategoria = nombresubcategoria;
+    }
+    
+    public String getNombrecategoria(){
+        return nombrecategoria;
+    }
+    
+    public void setNombrecategoria(String nombrecategoria){
+        this.nombrecategoria = nombrecategoria;
+    }
+    
     
     public String addSubcategoria() {
        
             SubcategoriasJpaController sjc = new SubcategoriasJpaController(emf);
-            Subcategorias subcateg = new Subcategorias();
-                subcateg.setNombrecategoria(subcategoria.getNombrecategoria());
-                subcateg.setNombresubcategoria(subcategoria.getNombresubcategoria());
-                subcateg.setIdCategoria(subcategoria.getIdCategoria());
-                sjc.create(subcategoria);
+            CategoriaJpaController cjpa = new CategoriaJpaController(emf);
+            subcategoria.setNombresubcategoria(nombresubcategoria);
+            subcategoria.setNombrecategoria(nombrecategoria);
+            categoria = cjpa.findCategoria(subcategoria.getNombrecategoria());
+            subcategoria.setIdCategoria(categoria);
+            sjc.create(subcategoria);
             
             
             FacesContext.getCurrentInstance().addMessage(null,

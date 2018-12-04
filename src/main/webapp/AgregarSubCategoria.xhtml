@@ -14,34 +14,34 @@
     
     <ui:include src="header.xhtml"></ui:include>
     <body>
-        
+        <div class="container mt-4" align="center"> 
         <div class="col-xs-4"></div>
         <div class="card bg-light mb-2">
         <div class="card-header" align="center">Agregar Subcategorias</div>
         <div class="card-body">
-            <legend>Agregar Subcategorias</legend>
             <h:form>
+                <div class="container mt-4" align="center"> 
                 <div class="form-group row">
                     <label for="inputNombreSubcategoria" class="col-sm-2 col-form-label">Subcategoria:</label>
                     <div class="col-sm-3">
-                        <p:inputText type="text" class="form-control" id="inputNombreSubcategoria" placeholder="Nombre de la Subcategoria" required="true" value="#{subcategoriaController.subcategoria.nombresubcategoria}" />
+                        <p:inputText type="text" class="form-control" id="inputNombreSubcategoria" placeholder="Nombre de la Subcategoria" required="true" value="#{subcategoriaController.nombresubcategoria}" />
                     </div>
                     <label for="inputNombreCategoria" class="col-sm-2 col-form-label">Categoria a la que corresponde:</label>
                     <div class="col-sm-4">
-                        <p:inputText type="text" class="form-control" id="inputNombreCategoria" placeholder="Nombre de la categoria" required="true" value="#{subcategoriaController.subcategoria.nombrecategoria}" />
+                        <p:inputText type="text" class="form-control" id="inputNombreCategoria" placeholder="Nombre de la categoria" required="true" value="#{subcategoriaController.nombrecategoria}" />
                     </div>
                 </div>
                 
                 <div class="form-group row">
                         <div class="col-sm-1">
-                            <button type="submit" class="btn btn-primary btn-lg" jsf:action="#{subcategoriaController.addSubcategoria()}">Agregar</button>
+                            <button type="submit" class="btn btn-primary btn-lg" jsf:action="#{subcategoriaController.addSubcategoria}">Agregar</button>
                         </div>
+                </div>
                 </div>
             </h:form>
         </div>
         </div>
-       
-     <footer>Algunos derechos de autor</footer>   
+        </div>
     </body>
     
     <ui:include src="footer.xhtml"></ui:include>
