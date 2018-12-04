@@ -21,7 +21,7 @@ import javax.xml.bind.annotation.XmlRootElement;
 
 /**
  *
- * @author eduar
+ * @author Janeth
  */
 @Entity
 @Table(name = "subcategorias", schema = "cella")
