@@ -211,7 +211,17 @@ public class ProfesorJpaController implements Serializable {
         return (Profesor) q.getSingleResult();
     }
     
+    //Nuevo
    
 
+    public boolean findProfesorCorreoYContra(String correo, String contra) {
+        EntityManager em = getEntityManager();
+        Query q = em.createNamedQuery("Profesor.findByCorreoAndContrasena")
+                .setParameter(1, correo)
+                .setParameter(2, contra);
+        return !q.getResultList().isEmpty();
+    }
+   
+    
     
 }

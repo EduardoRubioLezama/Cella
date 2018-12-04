@@ -155,4 +155,12 @@ public class AlumnoJpaController implements Serializable {
         }
         return (Alumno) q.getSingleResult();        
     }
+    
+    public boolean findAlumnoCorreoYContra(String correo, String contra){
+        EntityManager em = getEntityManager();
+        Query q = em.createNamedQuery("Alumno.findByCorreoAndContrasena")
+                .setParameter(1,correo)
+                .setParameter(2,contra);
+        return !q.getResultList().isEmpty();
+    }
 }

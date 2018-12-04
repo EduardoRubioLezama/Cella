@@ -39,7 +39,9 @@ import javax.xml.bind.annotation.XmlTransient;
     , @NamedQuery(name = "Profesor.findByApellidom", query = "SELECT p FROM Profesor p WHERE p.apellidom = :apellidom")
     , @NamedQuery(name = "Profesor.findByEdocuenta", query = "SELECT p FROM Profesor p WHERE p.edocuenta = :edocuenta")
     , @NamedQuery(name = "Profesor.findByRfc", query = "SELECT p FROM Profesor p WHERE p.rfc = :rfc")
-    , @NamedQuery(name = "Profesor.findByNotrabajador", query = "SELECT p FROM Profesor p WHERE p.notrabajador = :notrabajador")})
+    , @NamedQuery(name = "Profesor.findByNotrabajador", query = "SELECT p FROM Profesor p WHERE p.notrabajador = :notrabajador")
+    , @NamedQuery(name = "Profesor.findByCorreoAndContrasena", query = "SELECT a.correo,a.contrasena FROM Profesor a WHERE a.correo = ?1 and a.contrasena = ?2")})
+
 public class Profesor implements Serializable {
 
     private static final long serialVersionUID = 1L;

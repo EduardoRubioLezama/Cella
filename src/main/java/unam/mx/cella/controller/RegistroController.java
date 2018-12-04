@@ -135,17 +135,17 @@ public class RegistroController {
             alum.setContrasena(alumno.getContrasena());
             alum.setEdocuenta(true);
 
-            pjpa.create(alum);
-           /* CorreoController cc = new CorreoController();
+            //pjpa.create(alum);
+            CorreoController cc = new CorreoController();
             cc.setTo(alumno.getCorreo());
-            cc.setFrom(alumno.getCorreo());
-            cc.setUsername(alumno.getCorreo());
+            //cc.setFrom(alumno.getCorreo());
+            //cc.setUsername(alumno.getCorreo());
             
-            cc.submitEmail();
-            */
+            String resultado = cc.submitEmail();
+            
             FacesContext.getCurrentInstance().addMessage(null,
                     new FacesMessage(FacesMessage.SEVERITY_INFO,
-                                      " Se ha enviado un correo de confirmacion a: " + alumno.getCorreo() + "\n Verifica tu correo para activar la cuenta", ""));
+                                      "Resultado del email:" + resultado , ""));
         }
         //FacesContext.getCurrentInstance().getExternalContext().redirect(".xhtml");
         return null;

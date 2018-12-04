@@ -12,7 +12,6 @@
     <nav class="navbar navbar-expand-lg navbar-light bg-light">
         <a class="navbar-brand" href="Cella.xhtml">
             <img src="resources/images/cella.jpg" width="90" height="60" class="d-inline-block align-top" />
-            Cella
         </a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
@@ -28,14 +27,15 @@
                 </li>
                 <li>
                     <h:form class="form-inline my-2 my-lg-0">
-                        <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search"/>
-                        <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+                       <!-- <h:inputText class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search" value="#{busquedaController.busqueda}"/> -->
+                        <h:inputText value="#{homeController.busqueda}"/>
+                        <button class="btn btn-outline-success my-2 my-sm-0" type="submit" jsf:action="#{homeController.loadResultBusqueda}">Search</button>
                     </h:form>
                 </li>    
                 <li>
                   <!--  <p:graphicImage value="#{inicioSesion.miFoto}" width="50" height="50" /> #{inicioSesion.alum.correo} -->
 
-                    <a href="Perfil.xhtml"><p:graphicImage value="#{inicioSesion.miFoto}" width="50" height="50" /> #{inicioSesion.alum.correo}</a> 
+                    <a class="nav-link" href="Perfil.xhtml">#{inicioSesion.email} <p:graphicImage value="#{inicioSesion.miFoto}" width="50" height="50" /></a> 
                 </li>
                 <li>
                     <h:form class="form-inline my-2 my-lg-0">
