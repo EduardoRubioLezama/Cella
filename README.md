@@ -74,7 +74,7 @@ con contraseña: x eso es lo que deberás de poner en "tu-contraseña"
 ## Descargando dependencias
 
 Ubícate en tu netbeans y elige el proyecto mi-primer-aplicacion-web
-click derecho y picar: Clean and Build esto descargará todas las dependencias
+click derecho y picar: Build with dependencies,  esto descargará todas las dependencias
 que necesita el proyecto para correr y debemos de esperar a que termine de descargar
 las dependencias.
 
