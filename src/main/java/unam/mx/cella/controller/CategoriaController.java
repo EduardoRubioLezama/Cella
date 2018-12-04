@@ -14,15 +14,9 @@ import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import unam.mx.cella.modelo.EntityProvider;
 import unam.mx.cella.modelo.Categoria;
-<<<<<<< HEAD
 import unam.mx.cella.modelo.CategoriaJpaController;
 import unam.mx.cella.modelo.Subcategorias;
 import unam.mx.cella.modelo.SubcategoriasJpaController;
-=======
-import unam.mx.cella.modelo.controller.CategoriaJpaController;
-import unam.mx.cella.modelo.Subcategorias;
-import unam.mx.cella.modelo.controller.SubcategoriasJpaController;
->>>>>>> 11c02a74516c4419684805ff421a552ecd4272f1
 
 /**
  *
@@ -99,10 +93,7 @@ public class CategoriaController {
                 cjc.create(categ);
             }
             categ = cjc.findCategoria(Integer.SIZE);
-            subcateg.setNombrecategoria(subcategoria.getNombrecategoria());
-            subcateg.setNombresubcategoria(subcategoria.getNombresubcategoria());
             subcateg.setIdCategoria(categ);
-            sjc.create(subcateg);
 
             FacesContext.getCurrentInstance().addMessage(null,
                                                          new FacesMessage(FacesMessage.SEVERITY_INFO,
@@ -110,11 +101,8 @@ public class CategoriaController {
          
         return null;
     }
+    
     private EntityManager getEntityManager() {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
-<<<<<<< HEAD
 }
-=======
-}
->>>>>>> 11c02a74516c4419684805ff421a552ecd4272f1
