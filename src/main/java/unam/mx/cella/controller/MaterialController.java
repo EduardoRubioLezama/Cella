@@ -19,6 +19,8 @@ import javax.faces.context.FacesContext;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import org.primefaces.event.FileUploadEvent;
+import org.primefaces.model.ByteArrayContent;
+import org.primefaces.model.StreamedContent;
 import org.primefaces.model.UploadedFile;
 import unam.mx.cella.modelo.Categoria;
 import unam.mx.cella.modelo.CategoriaJpaController;
@@ -33,7 +35,7 @@ import unam.mx.cella.modelo.exceptions.NonexistentEntityException;
 
 /**
  *
- * @author rossa
+ * @author eduar
  */
 @ManagedBean
 @SessionScoped
@@ -159,6 +161,14 @@ public class MaterialController {
     
     }
     
+    public StreamedContent getMiFoto() {
+        
+        if (material.getFoto() != null) {
+            return new ByteArrayContent(material.getFoto());
+        }
+        return null;
+    }
+    
     public void addNuevo() throws IOException{
         FacesContext.getCurrentInstance().getExternalContext().redirect("AgregarNuevoMaterial.xhtml");
     }
@@ -196,10 +206,8 @@ public class MaterialController {
     }
     
     public String addMaterialN() throws NonexistentEntityException, Exception{
-                       
-        UnidadmaterialJpaController umjpa = new UnidadmaterialJpaController(emf);
+              
         Material mt = new Material();
-        Unidadmaterial umt = new Unidadmaterial();
         material = mjpa.findMaterial(nombrematerial);
         if(material == null){
             mt.setNombrematerial(nombrematerial);
@@ -209,23 +217,19 @@ public class MaterialController {
             }
             
             mjpa.create(mt);
+            FacesContext.getCurrentInstance().addMessage(null,
+                new FacesMessage(FacesMessage.SEVERITY_INFO,
+                "Se ha agregado con exito el material ", ""));
+        
             material = mjpa.findMaterial(nombrematerial);
         }
-        else if(material != null){
-            material.setFoto(fotografia.getContents());
-            mjpa.edit(material);
-        }
-        mt = mjpa.findMaterial(nombrematerial);
-        umt.setNombrematerial(nombrematerial);
-        umt.setEstado(estado.toLowerCase());
-        
-        umt.setIdMaterial(mt);
-        //umjpa.create(umt);
-    
-        FacesContext.getCurrentInstance().addMessage(null,
+        else{
+            FacesContext.getCurrentInstance().addMessage(null,
                 new FacesMessage(FacesMessage.SEVERITY_INFO,
-                "Se ha agregado una unidad del tipo: " + nombrematerial + " con el id " + umt.getId() +" y estado: "+ umt.getEstado() , ""));
+                "Este material ya existe en el sistema" , ""));
         
+        }
+      
                 FacesContext.getCurrentInstance().getExternalContext().redirect("MaterialCategorias.xhtml");
         return null;
     }

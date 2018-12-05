@@ -33,7 +33,8 @@
         
         <!-- <ui:repeat value="#{kitController.materiales}" var="item">-->
                     
-                
+        <p:graphicImage value="#{materialController.miFoto}" width="120" height="150"/> 
+
         <p:selectManyCheckbox id="grid2" value="#{materialController.cseleccionadas}" layout="pageDirection" columns="3">
             <!--<f:selectItems itemLabel="#{item}" itemValue="#{item}" />-->
             <f:selectItems value="#{materialController.categorias}" var="cat" itemLabelEscaped="false" itemLabel="#{cat}" itemValue="#{cat}" />
