@@ -78,19 +78,35 @@ public class SubcategoriaController {
 
     
     public String addSubcategoria() {
-       
-            SubcategoriasJpaController sjc = new SubcategoriasJpaController(emf);
-            Subcategorias subcateg = new Subcategorias();
-                subcateg.setNombrecategoria(subcategoria.getNombrecategoria());
-                subcateg.setNombresubcategoria(subcategoria.getNombresubcategoria());
-                subcateg.setIdCategoria(subcategoria.getIdCategoria());
-                sjc.create(subcategoria);
-            
-            
+        if(subcategoria.getNombrecategoria().equals(subcategoria.getNombresubcategoria())){
             FacesContext.getCurrentInstance().addMessage(null,
-                                                         new FacesMessage(FacesMessage.SEVERITY_INFO,
-                                                                          "El registro se ha realizado correctamente", ""));
-         
+                          new FacesMessage(FacesMessage.SEVERITY_INFO,
+                         "Una categoria no puede ser subcategoria de si misma, intenta de nuevo", ""));
+        
+        }
+        else{
+        
+            SubcategoriasJpaController sjc = new SubcategoriasJpaController(emf);
+            Subcategorias aux = sjc.findSubcategorias(subcategoria.getNombrecategoria());
+                    
+            if (aux.getNombresubcategoria().equals(subcategoria.getNombresubcategoria())) {
+                FacesContext.getCurrentInstance().addMessage(null,
+                          new FacesMessage(FacesMessage.SEVERITY_INFO,
+                         "Esta subcategoria ya ha sido agregada.", ""));
+            }
+            else{
+            Subcategorias subcateg = new Subcategorias();
+            subcateg.setNombrecategoria(subcategoria.getNombrecategoria());
+            subcateg.setNombresubcategoria(subcategoria.getNombresubcategoria());
+            
+            //subcateg.setIdCategoria(subcategoria.getIdCategoria());
+            sjc.create(subcategoria);
+                        
+            FacesContext.getCurrentInstance().addMessage(null,
+                          new FacesMessage(FacesMessage.SEVERITY_INFO,
+                         "Subcategoria agregada con exito", ""));
+            }
+        } 
         return null;
     }
    

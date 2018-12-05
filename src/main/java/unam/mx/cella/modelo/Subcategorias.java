@@ -43,9 +43,7 @@ public class Subcategorias implements Serializable {
     private String nombrecategoria;
     @Column(name = "nombresubcategoria")
     private String nombresubcategoria;
-    @JoinColumn(name = "id_categoria", referencedColumnName = "id")
-    @ManyToOne(optional = false)
-    private Categoria idCategoria;
+    
 
     public Subcategorias() {
     }
@@ -77,14 +75,7 @@ public class Subcategorias implements Serializable {
     public void setNombresubcategoria(String nombresubcategoria) {
         this.nombresubcategoria = nombresubcategoria;
     }
-
-    public Categoria getIdCategoria() {
-        return idCategoria;
-    }
-
-    public void setIdCategoria(Categoria idCategoria) {
-        this.idCategoria = idCategoria;
-    }
+   
 
     @Override
     public int hashCode() {

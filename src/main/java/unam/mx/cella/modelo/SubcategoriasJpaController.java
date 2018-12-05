@@ -135,4 +135,15 @@ public class SubcategoriasJpaController implements Serializable {
         }
     }
     
+    public Subcategorias findSubcategorias(String categoria) {
+        EntityManager em = getEntityManager();
+        Query q;
+        q = em.createNamedQuery("Subcategorias.findByNombrecategoria")
+                .setParameter("nombrecategoria",categoria);
+                
+        if (q.getResultList().isEmpty()) {
+            return null;
+        }
+        return (Subcategorias) q.getSingleResult();
+    }
 }
