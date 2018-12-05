@@ -253,6 +253,5 @@ public class MaterialController {
     private EntityManager getEntityManager() {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
-    
-    
+        
 }

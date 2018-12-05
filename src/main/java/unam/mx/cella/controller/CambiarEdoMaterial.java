@@ -77,10 +77,11 @@ public class CambiarEdoMaterial {
         umt.setEstado(estado);
         umjpa.edit(umt);
         
-         FacesContext.getCurrentInstance().addMessage(null,
+        FacesContext.getCurrentInstance().addMessage(null,
                                             new FacesMessage(FacesMessage.SEVERITY_INFO,
                                                "Se ha cambiado el estado del material con id: " + id + " a estado: "+ umt.getEstado() , ""));
         return null;
     }
     
 }
+

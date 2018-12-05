@@ -275,5 +275,11 @@ public class UnidadmaterialJpaController implements Serializable {
             em.close();
         }
     }
-    
+        
+    public boolean findDisponibilidadMaterial(String nombre) {
+        EntityManager em = getEntityManager();
+        Query q = em.createNamedQuery("Unidadmaterial.findEstadoByNombrematerial")
+                .setParameter(1,nombre);        
+        return !q.getResultList().isEmpty();
+    }
 }
