@@ -182,16 +182,10 @@ public class MaterialController {
         if(material == null){
             mt.setNombrematerial(nombrematerial);
             mt.setDescripcion(descripcion);
-            if(fotografia != null){
-                mt.setFoto(fotografia.getContents());
-            }
-            
+                        
             mjpa.create(mt);
         }
-        else if(material != null){
-            material.setFoto(fotografia.getContents());
-            mjpa.edit(material);
-        }
+        
         mt = mjpa.findMaterial(nombrematerial);
         umt.setNombrematerial(nombrematerial);
         umt.setEstado(estado.toLowerCase());

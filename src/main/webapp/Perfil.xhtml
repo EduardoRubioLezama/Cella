@@ -5,7 +5,8 @@
       xmlns:jsf="http://xmlns.jcp.org/jsf"
       xmlns:h="http://xmlns.jcp.org/jsf/html"
       xmlns:p="http://primefaces.org/ui"
-      xmlns:f="http://xmlns.jcp.org/jsf/core">
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:c="http://xmlns.jcp.org/jsp/jstl/core">
 
     <h:head>
        
@@ -16,28 +17,54 @@
 
     
     <h:body>
-
-        <h5>#{editarPerfil.inicioSesionRol.rol}</h5>
-       
-       
-        <p:graphicImage value="#{inicioSesion.miFoto}" width="100" height="100"/>
+        <div class="card-group">
+            <div style="margin-bottom: 50px; margin-right: 50px; margin-left: 50px; margin-top: 30px;">
+                
+                <p:graphicImage value="#{inicioSesion.miFoto}" width="250" height="250"/>
+            </div>
+            <div class="card" style="margin-bottom: 10px; margin-right: 50px; margin-left: 50px; margin-top: 30px;">
+                <div class="card-body">
+                    <c:if test="#{inicioSesion.rol == 3}">
+                    
+                    <h4 class="card-title">Nombre Usuario  : #{inicioSesion.prof.nombreusuario}</h4>
+                    <h4 class="card-title">Nombre          : #{inicioSesion.prof.nombre}</h4>
+                    <h4 class="card-title">Apellido Paterno: #{inicioSesion.prof.apellidop}</h4>
+                    <h4 class="card-title">Apellido Materno: #{inicioSesion.prof.apellidom}</h4>
+                    <h4 class="card-title">Correo          : #{inicioSesion.prof.correo}</h4>
+                    <h4 class="card-title">RFC             : #{inicioSesion.prof.rfc}</h4>
+                    </c:if>
+                    
+                    <c:if test="#{inicioSesion.rol == 1}">
+                    
+                    <h4 class="card-title">Nombre Usuario  : #{inicioSesion.alum.nombreusuario}</h4>
+                    <h4 class="card-title">Nombre          : #{inicioSesion.alum.nombre}</h4>
+                    <h4 class="card-title">Apellido Paterno: #{inicioSesion.alum.apellidop}</h4>
+                    <h4 class="card-title">Apellido Materno: #{inicioSesion.alum.apellidom}</h4>
+                    <h4 class="card-title">Correo          : #{inicioSesion.alum.correo}</h4>
+                    
+                    </c:if>
+ 
+                </div>
+            </div>
+        </div>    
         
-        <h:form id="altaForm" enctype="multipart/form-data">   
+        <h:form id="altaForm" enctype="multipart/form-data" style="margin-bottom: 100px; margin-right: 50px; margin-left: 50px; margin-top: 20px;">   
             <tr>
-                <td>Cambiar fotografia</td>
+                <td><h:outputText value="Cambiar foto:" style="margin-right: 10px; font-size: 16pt;"> </h:outputText></td>
                 
                 <td><p:fileUpload value="#{editarPerfil.fotografia}" mode="simple" skinSimple="true"
                                   fileUploadListener="#{editarPerfil.fileUploadListener}" /></td>
             </tr>
             
-            <div class="form-group row">
-                    <div class="col-sm-3" align="right">
+            <div class="form-group row" style="margin-top: 20px;">
+                <div class="col-sm-3" align="center">
                        
-                        <button type="submit" class="btn btn-primary btn-lg" jsf:action="#{editarPerfil.addFoto(inicioSesion.id)}">Terminar</button>
+                        <button type="submit" class="btn btn-primary btn-lg" jsf:action="#{editarPerfil.addFoto(inicioSesion.id)}">Editar</button>
 
                     </div>
             </div>
         </h:form>
+        
     </h:body>   
     
     <ui:include src="footer.xhtml"></ui:include>

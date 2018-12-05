@@ -63,23 +63,7 @@ public class RegistroController {
 
     }
     
-  /*  public String mensaje(){
-        if ( !(confirmacion.equals(alumno.getContrasena()))) {
-            FacesContext.getCurrentInstance().addMessage(null
-            , new FacesMessage(FacesMessage.SEVERITY_ERROR, 
-                    "Fallo de registro: Las contraseñas deben coincidir", ""));
-            System.out.println(confirmacion+ " " + alumno.getNombre());
-        }
-        
-        else{
-            FacesContext.getCurrentInstance().addMessage(null
-            , new FacesMessage(FacesMessage.SEVERITY_ERROR, 
-                    "Registro exitoso" + alumno.getNombre(), ""));
-        }
-         
-        return null; 
-    }*/
-    
+ 
     public boolean verificaUsuario(String userName){
         
         AlumnoJpaController ajpa = new AlumnoJpaController(emf);
@@ -113,17 +97,11 @@ public class RegistroController {
         } 
         
         else {
-            // LoginJpaController ljpa = new LoginJpaController(emf);
+            
             AlumnoJpaController pjpa = new AlumnoJpaController(emf);
             
-            // Login login = new Login();
-            //login.setUsuario(usuario);
-            //login.setPassword(contraseña);
-            //ljpa.create(login);
-            //login = ljpa.findLoginByUsuario(usuario);
-
             Alumno alum = new Alumno();
-            //alum.setLoginId(login.getId());
+            
            //Se envia correo con link de confirmacion 
            
            
