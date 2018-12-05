@@ -3,7 +3,8 @@
       xmlns:ui="http://xmlns.jcp.org/jsf/facelets" 
       xmlns:jsf="http://xmlns.jcp.org/jsf"
       xmlns:h="http://xmlns.jcp.org/jsf/html"
-      xmlns:p="http://primefaces.org/ui">  
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">  
     
     
     
@@ -12,7 +13,7 @@
         <title>Agregar Subcategorias</title>
     </h:head>    
     
-    <ui:include src="header.xhtml"></ui:include>
+    <ui:include src="navBar_admin.xhtml"></ui:include>
     <body>
         
         <div class="col-xs-4"></div>
@@ -24,11 +25,19 @@
                 <div class="form-group row">
                     <label for="inputNombreSubcategoria" class="col-sm-2 col-form-label">Subcategoria:</label>
                     <div class="col-sm-3">
-                        <p:inputText type="text" class="form-control" id="inputNombreSubcategoria" placeholder="Nombre de la Subcategoria" required="true" value="#{subcategoriaController.subcategoria.nombresubcategoria}" />
+                         <div class="col-sm-4" align="right">
+                            <p:selectOneMenu id="car" value="#{subcategoriaController.subcategoria.nombresubcategoria}" effect="fold" editable="true">
+                                <f:selectItem itemLabel=" " itemValue=" " />
+                                <f:selectItems value="#{subcategoriaController.categorias}" />
+                            </p:selectOneMenu>
+                </div>
                     </div>
                     <label for="inputNombreCategoria" class="col-sm-2 col-form-label">Categoria a la que corresponde:</label>
                     <div class="col-sm-4">
-                        <p:inputText type="text" class="form-control" id="inputNombreCategoria" placeholder="Nombre de la categoria" required="true" value="#{subcategoriaController.subcategoria.nombrecategoria}" />
+                        <p:selectOneMenu id="car2" value="#{subcategoriaController.subcategoria.nombrecategoria}" effect="fold" editable="true">
+                            <f:selectItem itemLabel=" " itemValue=" " />
+                            <f:selectItems value="#{subcategoriaController.subcategorias}" />
+                        </p:selectOneMenu>
                     </div>
                 </div>
                 

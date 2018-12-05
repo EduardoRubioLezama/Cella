@@ -6,6 +6,7 @@ package unam.mx.cella.controller;
  * and open the template in the editor.
  */
 
+import java.io.IOException;
 import java.util.List;
 import java.util.Locale;
 import javax.faces.application.FacesMessage;
@@ -125,6 +126,10 @@ public class MaterialController {
     public void disponible(){
         this.setEstado("disponible");
     
+    }
+    
+    public void addNuevo() throws IOException{
+        FacesContext.getCurrentInstance().getExternalContext().redirect("AgregarNuevoMaterial.xhtml");
     }
     
     public String addMaterial() throws NonexistentEntityException, Exception{

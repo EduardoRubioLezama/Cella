@@ -135,18 +135,18 @@ public class RegistroController {
             alum.setContrasena(alumno.getContrasena());
             alum.setEdocuenta("inactiva");
 
-            pjpa.create(alum);
+            //pjpa.create(alum);
             
-            //CorreoController cc = new CorreoController();
-            //cc.setTo(alumno.getCorreo());
-            //cc.setFrom(alumno.getCorreo());
-            //cc.setUsername(alumno.getCorreo());
+            CorreoController cc = new CorreoController();
+            cc.setTo(alumno.getCorreo());
+            cc.setFrom(alumno.getCorreo());
+            cc.setUsername(alumno.getCorreo());
             
-            //String resultado = cc.submitEmail();
-            /*
+            String resultado = cc.submitEmail();
+            
             FacesContext.getCurrentInstance().addMessage(null,
                     new FacesMessage(FacesMessage.SEVERITY_INFO,
-                                      "Resultado del email:" + resultado , ""));*/
+                                      "Resultado del email:" + resultado , ""));
         }
         //FacesContext.getCurrentInstance().getExternalContext().redirect(".xhtml");
         return null;

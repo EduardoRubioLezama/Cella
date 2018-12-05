@@ -59,13 +59,21 @@ public class EliminarmaterialController {
     }
         
     public String removeUnidadMaterial() throws IllegalOrphanException, NonexistentEntityException, unam.mx.cella.modelo.exceptions.IllegalOrphanException, unam.mx.cella.modelo.exceptions.NonexistentEntityException{
+        
         UnidadmaterialJpaController umjpa = new UnidadmaterialJpaController(emf);
         Unidadmaterial umt = umjpa.findUnidadmaterial(id);
-        umjpa.destroy(umt.getId());
+        if(umt == null){
+             FacesContext.getCurrentInstance().addMessage(null,
+                               new FacesMessage(FacesMessage.SEVERITY_INFO,
+                               "El material con el id " + id + " no existe, intenta de nuevo" , ""));
+        }
+        else{
+            umjpa.destroy(umt.getId());
        
-        FacesContext.getCurrentInstance().addMessage(null,
-                                                         new FacesMessage(FacesMessage.SEVERITY_INFO,
-                                                                          "Felicidades, el material se ha eliminado correctamente" , ""));
+            FacesContext.getCurrentInstance().addMessage(null,
+                               new FacesMessage(FacesMessage.SEVERITY_INFO,
+                               "El material con el id "+ id+ " fue eliminado correctamente" , ""));
+        }
         return null;
     }
 }

@@ -17,7 +17,7 @@
     <ui:include src="navBar.xhtml"></ui:include>
     
     
-    <h:body>
+    <h:body >
         <h3>#{verKit.nombreKit}</h3>    
            
         <div class="col-md-4">
@@ -26,14 +26,17 @@
                 <div class="card">
                     <div class="card-body">
                         <h5 class="card-title">#{item}</h5>
-                        #{verKit.seleccionados}      
+                              
                     </div>
                 </div>
             </ui:repeat>
-                                               
-        </div>   
-           
-              
+                                                            
+        </div>
+        <h:form style="margin-bottom: 100px; margin-right: 50px; margin-left: 50px; margin-top: 30px;">
+            <div class="col-sm-3" align="right">
+                <button type="submit" class="btn btn-primary btn-lg">Reservar</button>
+            </div>   
+        </h:form >      
         
     </h:body>
     <ui:include src="footer.xhtml"></ui:include>

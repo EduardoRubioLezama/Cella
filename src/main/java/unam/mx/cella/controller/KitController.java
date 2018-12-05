@@ -4,16 +4,20 @@
  * and open the template in the editor.
  */
 package unam.mx.cella.controller;
+import static com.sun.faces.facelets.util.Path.context;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Locale;
+import javax.faces.application.Application;
 
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ApplicationScoped;
 import javax.faces.context.FacesContext;
 import javax.faces.application.FacesMessage;
+import javax.faces.bean.ManagedProperty;
+import javax.faces.bean.SessionScoped;
 import javax.persistence.EntityManagerFactory;
 import unam.mx.cella.modelo.ContenerKitMaterial;
 import unam.mx.cella.modelo.ContenerKitMaterialJpaController;
@@ -28,9 +32,11 @@ import unam.mx.cella.modelo.MaterialJpaController;
  * @author eduar
  */
 @ManagedBean
-@ApplicationScoped
+@SessionScoped
 public class KitController {
 
+    @ManagedProperty("#{inicioSesion}")
+    private InicioSesion inicioSesionprof;
     private ContenerKitMaterial ckm;
     private ContenerKitMaterialJpaController ckmjpa;
     private Kit kit;
@@ -39,6 +45,7 @@ public class KitController {
     private Material material;
     private MaterialJpaController mjpa;
     private List<String> seleccionados;
+    private int idProfesor;
     /**
      * Creates a new instance of CrearKitController
      * @return 
@@ -59,12 +66,28 @@ public class KitController {
     public Kit getKit() {
         return kit;
     }
-    
-    
-    
+         
     public void setKit(Kit kit) {
         this.kit = kit;
     }
+
+    public int getIdProfesor() {
+        return idProfesor;
+    }
+
+    public void setIdProfesor(int idProfesor) {
+        this.idProfesor = idProfesor;
+    }
+
+    public InicioSesion getInicioSesionprof() {
+        return inicioSesionprof;
+    }
+
+    public void setInicioSesionprof(InicioSesion inicioSesionprof) {
+        this.inicioSesionprof = inicioSesionprof;
+    }
+    
+    
     
     public KitController() {
          emf = EntityProvider.provider();
@@ -77,6 +100,10 @@ public class KitController {
         this.seleccionados = new ArrayList<>();
         this.ckm = new ContenerKitMaterial();
         this.ckmjpa = new ContenerKitMaterialJpaController(emf);
+        FacesContext context = FacesContext.getCurrentInstance();
+        Application application = context.getApplication();
+        inicioSesionprof = application.evaluateExpressionGet(context, "#{prof}", InicioSesion.class);
+        //this.idProfesor = inicioSesion;
     }
     
     public Kit verificaKit(String nombreKit){
@@ -102,6 +129,7 @@ public class KitController {
            
             nkit.setNombrekit(kit.getNombrekit());
             nkit.setMateria(kit.getMateria());
+            nkit.setIdProfesor(inicioSesionprof.getProf());
            // nkit.setIdProfesor(InicioSesion.prof);
 
             kjpa.create(nkit);

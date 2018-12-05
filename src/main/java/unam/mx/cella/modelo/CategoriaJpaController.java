@@ -6,6 +6,7 @@
 package unam.mx.cella.modelo;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
@@ -134,5 +135,18 @@ public class CategoriaJpaController implements Serializable {
             em.close();
         }
     }
+    
+    public List<String> getNombresCategoria(){
+        List<String> categorias = new ArrayList<>();
+        EntityManager em = getEntityManager();
+        Query q;
+        q = em.createNamedQuery("Categoria.findAll",Categoria.class);
+        List<Categoria> categoria= q.getResultList();
+        for (Categoria a :categoria){
+            categorias.add(a.getNombrecategoria());
+        }
+        return categorias;
+        
+    } 
     
 }

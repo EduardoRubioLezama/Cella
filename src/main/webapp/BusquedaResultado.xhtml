@@ -13,13 +13,10 @@
     </h:head>
     <ui:include src="navBar.xhtml"></ui:include>
 
-    <h:body >
+    <h:body>
         <h:form style="margin-bottom: 100px; margin-right: 50px; margin-left: 50px; margin-top: 30px;" >
-            <h5>#{inicioSesion.id}</h5>
-            <h5>#{inicioSesion.prof.id}</h5> 
-            <h5>#{inicioSesion.prof.nombreusuario}</h5> 
-            
-            <h5>#{homeController.busqueda}</h5>>
+                      
+            <h5>Resultados para #{homeController.busqueda}:</h5>
             <h:form style="margin-bottom: 100px; margin-right: 50px; margin-left: 50px; margin-top: 30px;" >
                 <div class="card-columns">
                     <ui:repeat value="#{homeController.resultado}" var="item">
