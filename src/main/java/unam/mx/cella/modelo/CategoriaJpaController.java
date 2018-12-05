@@ -13,8 +13,7 @@ import javax.persistence.Query;
 import javax.persistence.EntityNotFoundException;
 import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Root;
-import unam.mx.cella.modelo.Categoria;
-import unam.mx.cella.modelo.controller.exceptions.NonexistentEntityException;
+import unam.mx.cella.modelo.exceptions.NonexistentEntityException;
 
 /**
  *
@@ -120,6 +119,18 @@ public class CategoriaJpaController implements Serializable {
         } finally {
             em.close();
         }
+    }
+    
+    public Categoria findCategoria(String categoria){
+        EntityManager em = getEntityManager();
+        Query q;
+        q = em.createNamedQuery("Categoria.findByNombrecategoria")
+                .setParameter("nombrecategoria",categoria);
+                
+        if (q.getResultList().isEmpty()) {
+            return null;
+        }
+        return (Categoria) q.getSingleResult();
     }
 
     public int getCategoriaCount() {
