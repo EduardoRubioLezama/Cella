@@ -67,6 +67,7 @@ public class PreRegistroController {
         
         ProfesorJpaController ajpa = new ProfesorJpaController(emf);
         return ajpa.findCorreo(correo) == null;
+        
     }
     
     public String addUser() {
@@ -105,7 +106,7 @@ public class PreRegistroController {
             prof.setCorreo(profesor.getCorreo());
             prof.setNombreusuario(profesor.getNombreusuario());
             prof.setContrasena(profesor.getContrasena());
-            prof.setEdocuenta(true);
+            prof.setEdocuenta("activa");
             prof.setNotrabajador(profesor.getNotrabajador());
             prof.setRfc(profesor.getRfc());
             

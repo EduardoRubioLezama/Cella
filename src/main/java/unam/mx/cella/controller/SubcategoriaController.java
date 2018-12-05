@@ -6,6 +6,7 @@
 package unam.mx.cella.controller;
 
 
+import java.util.List;
 import java.util.Locale;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.RequestScoped;
@@ -31,7 +32,9 @@ public class SubcategoriaController {
     private Categoria categoria;
     private String nombrecategoria;
     private String nombresubcategoria;
- 
+    private SubcategoriasJpaController scjpa;
+    private List<Subcategorias> subcategorias;
+    
     
     /**
      * Creates a new instance of SubcategoriaController
@@ -43,6 +46,8 @@ public class SubcategoriaController {
                 new Locale("es-Mx"));
         this.subcategoria = new Subcategorias();
         this.categoria = new Categoria();
+        this.scjpa = new SubcategoriasJpaController(emf);
+        subcategorias = scjpa.findSubcategoriasEntities();
         this.nombresubcategoria = "";
         this.nombrecategoria = "";
         
@@ -79,6 +84,13 @@ public class SubcategoriaController {
         this.nombrecategoria = nombrecategoria;
     }
     
+    public List<Subcategorias> getSubcategorias(){
+        return subcategorias;
+    }
+    
+    public void setSubcategorias(List<Subcategorias> subcategorias){
+        this.subcategorias = subcategorias;
+    }
     
     public String addSubcategoria() {
        

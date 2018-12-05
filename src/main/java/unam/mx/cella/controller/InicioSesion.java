@@ -10,6 +10,7 @@ import java.io.IOException;
 import java.util.Locale;
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
+import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.SessionScoped;
 import javax.faces.context.FacesContext;
 import static javax.faces.context.FacesContext.getCurrentInstance;
@@ -37,13 +38,14 @@ public class InicioSesion {
     private Alumno alum;
     private Administrador admin;
     private Profesor prof;
-
+    private int rol;
+    private int id;
     private final ProfesorJpaController pjc;
     private final AdministradorJpaController adjc;
     private final AlumnoJpaController ajc;
-    private String email ;
+    private String email;
     private String pass;
-    
+
     public InicioSesion() {
         FacesContext.getCurrentInstance().getViewRoot().setLocale(new Locale("es-Mx"));
         emf = EntityProvider.provider();
@@ -57,9 +59,27 @@ public class InicioSesion {
         pass = "";
     }
 
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+    
+    
+
+    public int getRol() {
+        return rol;
+    }
+
     /**
      * @return the alum
      */
+    public void setRol(int rol) {
+        this.rol = rol;
+    }
+
     public Alumno getAlum() {
         return alum;
     }
@@ -99,34 +119,55 @@ public class InicioSesion {
         this.prof = prof;
     }
 
-    public String canLogin() {        
-        Alumno alumno = ajc.findAlumno(email);
-        
-        boolean logged = alumno != null;
-        System.out.println("el valor de looged es: " + logged);
-        if (logged ) {                                 
-            if ( alumno.getContrasena().equals(pass)) {
-                FacesContext.getCurrentInstance().addMessage(null,
-                    new FacesMessage(FacesMessage.SEVERITY_INFO,
-                            "iguales", ""));
-            }
+    public String canLogin() {
+        boolean loggedAlumno = ajc.findAlumnoCorreoYContra(email, pass);
+        boolean loggedAdmin = adjc.findAdministradorCorreoYContra(email, pass);
+        boolean loggedProfesor = pjc.findProfesorCorreoYContra(email, pass);
+
+        if (loggedAlumno) {
+            Alumno alumno = ajc.findAlumno(email);
+            alum = alumno;
+            rol = 1;
+            id = alum.getId();
             FacesContext context = getCurrentInstance();
             context.getExternalContext().getSessionMap().put("usuario", alumno);
-            //Esto es nero
-            alum = alumno;
+
+            FacesContext.getCurrentInstance().addMessage(null,
+                    new FacesMessage(FacesMessage.SEVERITY_INFO,
+                            "Felicidades, el alumno si existe en ele sistema", ""));
+            return "Cella?faces-redirect=true";
+//            return "secured/Principal?faces-redirect=true";
+        } else if (loggedAdmin) {
+            Administrador administrador = adjc.findAdministrador(email);
+            FacesContext context = getCurrentInstance();
+            context.getExternalContext().getSessionMap().put("usuario", administrador);
+            admin = administrador;
+            rol = 2;
+            id = admin.getId();
+            FacesContext.getCurrentInstance().addMessage(null,
+                    new FacesMessage(FacesMessage.SEVERITY_INFO,
+                            "Felicidades, el alumno si existe en ele sistema", ""));
+            return "CellaAdmin?faces-redirect=true";
+//            return "secured/Principal?faces-redirect=true";
+        } else if (loggedProfesor) {
+            Profesor profesor = pjc.findCorreo(email);
+            FacesContext context = getCurrentInstance();
+            context.getExternalContext().getSessionMap().put("usuario", profesor);
+            prof = profesor;
+            rol = 3;
+            id = prof.getId();
             FacesContext.getCurrentInstance().addMessage(null,
                     new FacesMessage(FacesMessage.SEVERITY_INFO,
                             "Felicidades, el alumno si existe en ele sistema", ""));
             return "Cella?faces-redirect=true";
         }
-        System.out.println("no entre al metodo");
-        return "registrar?faces-redirect=true";
+        return "Registrar?faces-redirect=true";
     }
 
     public String logout() {
         FacesContext context = getCurrentInstance();
         context.getExternalContext().invalidateSession();
-        return "Inicio?faces-redirect=true";
+        return "/faces/Inicio?faces-redirect=true";
     }
 
     /**
@@ -156,18 +197,25 @@ public class InicioSesion {
     public void setPass(String pass) {
         this.pass = pass;
     }
-    
+
     public StreamedContent getMiFoto() {
 
         if (alum.getFoto() != null) {
             return new ByteArrayContent(alum.getFoto());
         }
+        if (prof.getFoto() != null) {
+            return new ByteArrayContent(prof.getFoto());
+        }
+        if (admin.getFoto() != null) {
+            return new ByteArrayContent(admin.getFoto());
+        }
+
         return null;
     }
-     
+
     public DefaultStreamedContent byteToImage() throws IOException {
         byte[] imgBytes = alum.getFoto();
         ByteArrayInputStream img = new ByteArrayInputStream(imgBytes);
-        return new DefaultStreamedContent(img,"image/jpg");
-    }    
+        return new DefaultStreamedContent(img, "image/jpg");
+    }
 }

@@ -34,7 +34,8 @@ import javax.xml.bind.annotation.XmlRootElement;
     , @NamedQuery(name = "Alumno.findByNombre", query = "SELECT a FROM Alumno a WHERE a.nombre = :nombre")
     , @NamedQuery(name = "Alumno.findByApellidop", query = "SELECT a FROM Alumno a WHERE a.apellidop = :apellidop")
     , @NamedQuery(name = "Alumno.findByApellidom", query = "SELECT a FROM Alumno a WHERE a.apellidom = :apellidom")
-    , @NamedQuery(name = "Alumno.findByEdocuenta", query = "SELECT a FROM Alumno a WHERE a.edocuenta = :edocuenta")})
+    , @NamedQuery(name = "Alumno.findByEdocuenta", query = "SELECT a FROM Alumno a WHERE a.edocuenta = :edocuenta")
+    , @NamedQuery(name = "Alumno.findByCorreoAndContrasena", query = "SELECT a.correo,a.contrasena FROM Alumno a WHERE a.correo = ?1 and a.contrasena = ?2")})
 public class Alumno implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -66,7 +67,7 @@ public class Alumno implements Serializable {
     private byte[] foto;
     @Basic(optional = false)
     @Column(name = "edocuenta")
-    private boolean edocuenta;
+    private String edocuenta;
 
     public Alumno() {
     }
@@ -74,7 +75,7 @@ public class Alumno implements Serializable {
     public Alumno(Integer id) {
         this.id = id;
     }
-
+/*
     public Alumno(Integer id, String nombreusuario, String correo, String contrasena, String nombre, String apellidop, String apellidom, boolean edocuenta) {
         this.id = id;
         this.nombreusuario = nombreusuario;
@@ -84,7 +85,7 @@ public class Alumno implements Serializable {
         this.apellidop = apellidop;
         this.apellidom = apellidom;
         this.edocuenta = edocuenta;
-    }
+    }*/
 
     public Integer getId() {
         return id;
@@ -150,11 +151,11 @@ public class Alumno implements Serializable {
         this.foto = foto;
     }
 
-    public boolean getEdocuenta() {
+    public String getEdocuenta() {
         return edocuenta;
     }
 
-    public void setEdocuenta(boolean edocuenta) {
+    public void setEdocuenta(String edocuenta) {
         this.edocuenta = edocuenta;
     }
 
