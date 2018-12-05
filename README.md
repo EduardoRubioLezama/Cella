@@ -6,21 +6,21 @@ de ciencias en la UNAM.
 
 
 ## Integrantes
-Eduardo Rubio Lezama 
-Jaime
-José Carlos Buenrostro Rueda
-Rossana Palma
-Yessica Janeth Pablo
+1. Eduardo Rubio Lezama 
+2. Jaime Martinez
+3. José Carlos Buenrostro Rueda
+4. Rossana Palma
+5. Yessica Janeth Pablo
 
 ## Comenzando
 
 El siguiente procedimiento creará una copia del proyecto Cella en tu computadora 
-personal para con el propósito de hace pruebas sobre el mismo.
+personal con el propósito de hace pruebas sobre el mismo.
 
 ### Prerequisitos
 
-Todas las siguientes indicaciones están hechas en el sistema operativo Windows 10.
-Tener propiamente instalado y configurado los siguientes programas
+Todas las indicaciones están hechas en el sistema operativo Windows 10.
+Se debe tener propiamente instalado y configurado los siguientes programas
 
 1. JDK 8
 2. NetBeans (completo o en su versión JAVA EE) 8.2
@@ -55,8 +55,7 @@ ERROR:  CREATE DATABASE no puede ser ejecutado dentro de un bloque de transacci�
 ERROR: CREATE DATABASE no puede ser ejecutado dentro de un bloque de transacción
 SQL state: 25001
 ```
-Deberás de ejecutar la línea en la que se crea la base de datos cella y después 
-ejecutar el resto del script.
+Deberás de ejecutar primero la línea en la que se crea la base de datos cella, después ubicarte en la BDD cella que acabas de crear y después ejecutar el resto del script.
 Ahora ubícate nuevamente
 en el netbeans y en la carpeta src/main/resources/META-INF encontrarás el archivo
 persistence.xml 
