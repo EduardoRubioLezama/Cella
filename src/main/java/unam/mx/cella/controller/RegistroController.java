@@ -133,7 +133,7 @@ public class RegistroController {
             alum.setCorreo(alumno.getCorreo());
             alum.setNombreusuario(alumno.getNombreusuario());
             alum.setContrasena(alumno.getContrasena());
-            alum.setEdocuenta("disponible");
+            alum.setEdocuenta("inactiva");
 
             //pjpa.create(alum);
             

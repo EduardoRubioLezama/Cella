@@ -25,8 +25,7 @@ import javax.mail.internet.MimeMessage;
  *
  * @author eduar
  */
-@ManagedBean
-@RequestScoped
+
 public class CorreoController {
 
     private String to;
@@ -50,14 +49,14 @@ public class CorreoController {
     public CorreoController() {
         this.key = 0;
         this.to = null;
-        this.from = "eduardo_rubio_lezama@ciencias.unam.mx";
+        this.from = "cella.unam.is@gmail.com";
         //this.from = null;
         this.subject = "activa tu cuenta Cella";
         //this.subject = null;
        //this.body = null;
-       this.username = "eduardo_rubio_lezama@ciencias.unam.mx";
+       this.username = "cella.unam.is@gmail.com";
        //this.username = null;
-        this.password = "angiesismine";
+        this.password = "cella123+";
         //this.password = null;
         this.smtp = "smtp.gmail.com";
         //this.smtp = null;
@@ -187,7 +186,7 @@ public class CorreoController {
             transport.close();
 
         } catch (MessagingException me) {
-            me.toString();
+            me.printStackTrace();
             return "emailFal";
         }
         return "emailOk";

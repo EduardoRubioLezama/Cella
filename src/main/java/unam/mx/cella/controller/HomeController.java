@@ -86,7 +86,6 @@ public class HomeController {
     public List<String> getSeleccionados() {
         return seleccionados;
     }
-    
 
     public void setSeleccionados(List<String> seleccionados) {
         this.seleccionados = seleccionados;
