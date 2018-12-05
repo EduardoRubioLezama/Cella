@@ -5,6 +5,8 @@
  */
 package unam.mx.cella.controller;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Locale;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.RequestScoped;
@@ -27,23 +29,26 @@ import unam.mx.cella.modelo.SubcategoriasJpaController;
 public class CategoriaController {
 
     private final EntityManagerFactory emf;
+    private List<String> categorias;
+    private CategoriaJpaController cjpa;
     private Categoria categoria;
     private Subcategorias subcategoria;
     private String descripcion;
     private String nombrecategoria;
     private String nombresubcategoria;
-
+    private List<String> seleccionados;
 
     /**
      * Creates a new instance of CategoriaController
      */
     public CategoriaController() {
-         emf = EntityProvider.provider();
-        System.out.println("creado");
+        emf = EntityProvider.provider();
+        this.cjpa = new CategoriaJpaController(emf);
         FacesContext.getCurrentInstance().getViewRoot().setLocale(
                 new Locale("es-Mx"));
         this.categoria = new Categoria();
-      
+        this.categorias = cjpa.getNombresCategoria();
+        this.seleccionados = new ArrayList<>();
         descripcion = "";
     }
     public Categoria getCategoria(){
@@ -80,28 +85,43 @@ public class CategoriaController {
         descripcion = nueva;
     }
 
+    public List<String> getCategorias() {
+        return categorias;
+    }
+
+    public void setCategorias(List<String> categorias) {
+        this.categorias = categorias;
+    }
+
+    public List<String> getSeleccionados() {
+        return seleccionados;
+    }
+
+    public void setSeleccionados(List<String> seleccionados) {
+        this.seleccionados = seleccionados;
+    }
+
+    
+    
     public String addCategoria() {
        
             CategoriaJpaController cjc = new CategoriaJpaController(emf);
             Categoria categ = new Categoria();
-            SubcategoriasJpaController sjc = new SubcategoriasJpaController(emf);
-            Subcategorias subcateg = new Subcategorias();
-        
-            if(cjc.findCategoria(Integer.SIZE) == null){
-                categ.setNombrecategoria(categoria.getNombrecategoria());
-                categ.setDescripcion(categoria.getDescripcion());
-                cjc.create(categ);
+            Categoria aux = cjc.findCategoria(categoria.getNombrecategoria());
+            if (aux != null) {
+                FacesContext.getCurrentInstance().addMessage(null,
+                        new FacesMessage(FacesMessage.SEVERITY_INFO,
+                        "Categoria "+ categoria.getNombrecategoria() + " ya ha sido registrada", ""));
             }
-            categ = cjc.findCategoria(Integer.SIZE);
-            subcateg.setNombrecategoria(subcategoria.getNombrecategoria());
-            subcateg.setNombresubcategoria(subcategoria.getNombresubcategoria());
-            subcateg.setIdCategoria(categ);
-            sjc.create(subcateg);
-
+            else{
+            categ.setNombrecategoria(categoria.getNombrecategoria());
+            categ.setDescripcion(categoria.getDescripcion());
+            cjc.create(categ);
+            
             FacesContext.getCurrentInstance().addMessage(null,
-                                                         new FacesMessage(FacesMessage.SEVERITY_INFO,
-                                                                          "El registro se ha realizado correctamente", ""));
-         
+                        new FacesMessage(FacesMessage.SEVERITY_INFO,
+                        "Categoria "+ categoria.getNombrecategoria()+" agregada correctamente", ""));
+            }
         return null;
     }
     private EntityManager getEntityManager() {

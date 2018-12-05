@@ -7,20 +7,27 @@ package unam.mx.cella.controller;
  */
 
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Locale;
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.RequestScoped;
+import javax.faces.bean.SessionScoped;
 import javax.faces.context.FacesContext;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import org.primefaces.event.FileUploadEvent;
 import org.primefaces.model.UploadedFile;
+import unam.mx.cella.modelo.Categoria;
+import unam.mx.cella.modelo.CategoriaJpaController;
 import unam.mx.cella.modelo.EntityProvider;
 import unam.mx.cella.modelo.Material;
 import unam.mx.cella.modelo.Unidadmaterial;
 import unam.mx.cella.modelo.MaterialJpaController;
+import unam.mx.cella.modelo.PertenecerMaterialCategoria;
+import unam.mx.cella.modelo.PertenecerMaterialCategoriaJpaController;
 import unam.mx.cella.modelo.UnidadmaterialJpaController;
 import unam.mx.cella.modelo.exceptions.NonexistentEntityException;
 
@@ -29,7 +36,7 @@ import unam.mx.cella.modelo.exceptions.NonexistentEntityException;
  * @author rossa
  */
 @ManagedBean
-@RequestScoped
+@SessionScoped
 public class MaterialController {
 
     /**
@@ -45,6 +52,9 @@ public class MaterialController {
     private String estado;
     private MaterialJpaController mjpa;
     private UploadedFile fotografia;
+    private List<String> categorias;
+    private CategoriaJpaController cjpa;
+    private List<String> cseleccionadas;
 
     public UploadedFile getFotografia() {
         return fotografia;
@@ -57,6 +67,7 @@ public class MaterialController {
     public MaterialController() {
         emf = EntityProvider.provider();
         mjpa = new MaterialJpaController(emf);
+        cjpa = new CategoriaJpaController(emf);
         FacesContext.getCurrentInstance().getViewRoot().setLocale(
                 new Locale("es-Mx"));
         this.material = new Material();
@@ -65,7 +76,27 @@ public class MaterialController {
         descripcion = "";
         estado = "";
         materiales = mjpa.getNombresMaterial();
+        categorias = cjpa.getNombresCategoria();
+        cseleccionadas = new ArrayList<>();
     }
+
+    public List<String> getCategorias() {
+        return categorias;
+    }
+
+    public void setCategorias(List<String> categorias) {
+        this.categorias = categorias;
+    }
+
+    public List<String> getCseleccionadas() {
+        return cseleccionadas;
+    }
+
+    public void setCseleccionadas(List<String> cseleccionadas) {
+        this.cseleccionadas = cseleccionadas;
+    }
+    
+    
     
     public Material getMaterial(){
         return material;
@@ -162,6 +193,63 @@ public class MaterialController {
                                             new FacesMessage(FacesMessage.SEVERITY_INFO,
                                                "Se ha agregado una unidad del tipo: " + nombrematerial + " con el id " + umt.getId() +" y estado: "+ umt.getEstado() , ""));
         return null;
+    }
+    
+    public String addMaterialN() throws NonexistentEntityException, Exception{
+                       
+        UnidadmaterialJpaController umjpa = new UnidadmaterialJpaController(emf);
+        Material mt = new Material();
+        Unidadmaterial umt = new Unidadmaterial();
+        material = mjpa.findMaterial(nombrematerial);
+        if(material == null){
+            mt.setNombrematerial(nombrematerial);
+            mt.setDescripcion(descripcion);
+            if(fotografia != null){
+                mt.setFoto(fotografia.getContents());
+            }
+            
+            mjpa.create(mt);
+            material = mjpa.findMaterial(nombrematerial);
+        }
+        else if(material != null){
+            material.setFoto(fotografia.getContents());
+            mjpa.edit(material);
+        }
+        mt = mjpa.findMaterial(nombrematerial);
+        umt.setNombrematerial(nombrematerial);
+        umt.setEstado(estado.toLowerCase());
+        
+        umt.setIdMaterial(mt);
+        //umjpa.create(umt);
+    
+        FacesContext.getCurrentInstance().addMessage(null,
+                new FacesMessage(FacesMessage.SEVERITY_INFO,
+                "Se ha agregado una unidad del tipo: " + nombrematerial + " con el id " + umt.getId() +" y estado: "+ umt.getEstado() , ""));
+        
+                FacesContext.getCurrentInstance().getExternalContext().redirect("MaterialCategorias.xhtml");
+        return null;
+    }
+    
+    public void materialCategorias(){
+        PertenecerMaterialCategoriaJpaController pmcjpa = new PertenecerMaterialCategoriaJpaController(emf);
+        PertenecerMaterialCategoria pmc = new PertenecerMaterialCategoria();
+        Categoria categoria = new Categoria();
+      
+        
+        for (Iterator<String> iterator = cseleccionadas.iterator(); iterator.hasNext();) {
+            String next = iterator.next();
+            categoria =  cjpa.findCategoria(next);
+            pmc.setNombrecategoria(next);
+            pmc.setNombrematerial(nombrematerial);
+            pmc.setIdCategoria(categoria);
+            pmc.setIdMaterial(material);
+            pmcjpa.create(pmc);
+        }
+        
+        FacesContext.getCurrentInstance().addMessage(null,
+                new FacesMessage(FacesMessage.SEVERITY_INFO,
+                "Se han agregado las categorias a las que pertence "+ nombrematerial , ""));
+        
     }
 
     private EntityManager getEntityManager() {

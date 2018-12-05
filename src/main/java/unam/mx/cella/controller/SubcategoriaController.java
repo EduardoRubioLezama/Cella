@@ -88,24 +88,25 @@ public class SubcategoriaController {
         
             SubcategoriasJpaController sjc = new SubcategoriasJpaController(emf);
             Subcategorias aux = sjc.findSubcategorias(subcategoria.getNombrecategoria());
-                    
-            if (aux.getNombresubcategoria().equals(subcategoria.getNombresubcategoria())) {
-                FacesContext.getCurrentInstance().addMessage(null,
-                          new FacesMessage(FacesMessage.SEVERITY_INFO,
-                         "Esta subcategoria ya ha sido agregada.", ""));
-            }
-            else{
-            Subcategorias subcateg = new Subcategorias();
-            subcateg.setNombrecategoria(subcategoria.getNombrecategoria());
-            subcateg.setNombresubcategoria(subcategoria.getNombresubcategoria());
+            if (aux == null) {
+                Subcategorias subcateg = new Subcategorias();
+                subcateg.setNombrecategoria(subcategoria.getNombrecategoria());
+                subcateg.setNombresubcategoria(subcategoria.getNombresubcategoria());
             
-            //subcateg.setIdCategoria(subcategoria.getIdCategoria());
-            sjc.create(subcategoria);
+                //subcateg.setIdCategoria(subcategoria.getIdCategoria());
+                sjc.create(subcategoria);
                         
             FacesContext.getCurrentInstance().addMessage(null,
                           new FacesMessage(FacesMessage.SEVERITY_INFO,
                          "Subcategoria agregada con exito", ""));
             }
+            
+            else if (aux.getNombresubcategoria().equals(subcategoria.getNombresubcategoria())) {
+                FacesContext.getCurrentInstance().addMessage(null,
+                          new FacesMessage(FacesMessage.SEVERITY_INFO,
+                         "Esta subcategoria ya ha sido agregada.", ""));
+            }
+            
         } 
         return null;
     }
