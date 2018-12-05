@@ -5,6 +5,9 @@
  */
 package unam.mx.cella.controller;
 
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Locale;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.RequestScoped;
@@ -32,7 +35,11 @@ public class CategoriaController {
     private String descripcion;
     private String nombrecategoria;
     private String nombresubcategoria;
-
+    private List<Categoria> categorias;
+    private List<Subcategorias> subcategorias;
+    private CategoriaJpaController cjpa;
+    private SubcategoriasJpaController scjpa;
+    private List<Subcategorias> subcategsresult;
 
     /**
      * Creates a new instance of CategoriaController
@@ -43,6 +50,10 @@ public class CategoriaController {
         FacesContext.getCurrentInstance().getViewRoot().setLocale(
                 new Locale("es-Mx"));
         this.categoria = new Categoria();
+        this.cjpa = new CategoriaJpaController(emf);
+        this.scjpa = new SubcategoriasJpaController(emf);
+        this.categorias = cjpa.findCategoriaEntities();
+        this.subcategorias = scjpa.findSubcategoriasEntities();
         this.subcategoria = new Subcategorias();
         nombrecategoria = "";
         nombresubcategoria = "";
@@ -81,6 +92,22 @@ public class CategoriaController {
     public void setDescripcion(String nueva){
         descripcion = nueva;
     }
+    
+    public List<Categoria> getCategorias(){
+        return categorias;
+    }
+    
+    public void  setCategorias(List<Categoria> categorias){
+        this.categorias = categorias;
+    }
+    
+    public List<Subcategorias> getSubcategsResult(){
+        return subcategsresult;
+    }
+
+    public void setSubcategsResult(List<Subcategorias> subcategsresult){
+        this.subcategsresult = subcategsresult;
+    }
 
     public String addCategoria() {
        
@@ -99,6 +126,18 @@ public class CategoriaController {
                                                "Se ha agregado una unidad del tipo: " + categoria + " con el id " + categoria.getId() , ""));
         return null;
     }
+    
+    public void loadSubcategoria(Categoria categoria) throws IOException{
+        subcategsresult = new ArrayList<>();
+        for (Subcategorias sc :subcategorias){
+            if((sc.getIdCategoria()).equals(categoria)){
+                subcategsresult.add(sc);
+            }
+        }
+        
+        FacesContext.getCurrentInstance().getExternalContext().redirect("Subcategoria.xhtml");
+    }
+    
     private EntityManager getEntityManager() {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
